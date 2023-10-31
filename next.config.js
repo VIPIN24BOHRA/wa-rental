@@ -15,9 +15,7 @@ module.exports = withBundleAnalyzer({
     dirs: ['.'],
   },
   async redirects() {
-    return [
-    
-    ];
+    return [];
   },
   poweredByHeader: false,
   trailingSlash: false,
