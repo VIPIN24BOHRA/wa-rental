@@ -17,7 +17,7 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
       console.log('reply to user from here');
       console.log(app, type, payload);
     }
-    res.status(200).send('success');
+    res.status(200).send('');
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
