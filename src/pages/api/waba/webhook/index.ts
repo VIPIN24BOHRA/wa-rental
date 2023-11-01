@@ -6,7 +6,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { replyToUser } from '@/utils/replyHelper';
 
 async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).send('ok');
+  res.status(200).send(`this is phone number${process.env.PHONE_ID}`);
 }
 
 async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
