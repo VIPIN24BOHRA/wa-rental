@@ -15,7 +15,7 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
       // process only the message that comes from user.
       // reply to user
       console.log('reply to user from here');
-      console.log(app, type, payload);
+      console.log(app, type, payload, req.body);
     }
     res.status(200).send('');
   } catch (e) {

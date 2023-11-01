@@ -10,4 +10,4 @@ require('dotenv').config({
   path: '.env.local',
 });
 
-require('./src/modules/firebase/firebase.ts');
+// require('./src/modules/firebase/firebase.ts');
