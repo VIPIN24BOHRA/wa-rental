@@ -36,5 +36,13 @@ export const actionsFactory = (config: MachineConfig): any => {
         config.userMetaData.phonenumber
       );
     },
+    sendStillInConstructionMessage: async () => {
+      const message = `👋 hey We are still building this application will ping you soon 🔒\n\n  Till then don't forget to share our service with your friend in need.😊`;
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
   };
 };

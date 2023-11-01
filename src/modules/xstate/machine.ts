@@ -28,9 +28,11 @@ export const machineFactory = (config: MachineConfig) => {
         },
         default: {
           entry: 'sendWelcomeMessage',
+
           on: {
             ON_MESSAGE: {
               target: 'idle',
+              actions: ['sendStillInConstructionMessage'],
             },
           },
         },

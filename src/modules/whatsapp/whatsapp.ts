@@ -19,12 +19,6 @@ async function makeRequestToWhatsapp(data: any) {
       apikey: process.env.API_KEY,
     },
   };
-  console.log(
-    payload,
-    process.env.API_KEY,
-    process.env.PHONE_ID,
-    process.env.APP_NAME
-  );
   try {
     const res = await axios
       .post('https://api.gupshup.io/wa/api/v1/msg', parsedData, config)
@@ -32,9 +26,7 @@ async function makeRequestToWhatsapp(data: any) {
         console.log('Whatsapp service failed', e);
       });
 
-    console.log(res);
-
-    console.log(res?.status === 200 ? 'success' : 'failure');
+    console.log(res?.status === 202 ? 'success' : 'failure');
     return res;
   } catch (err) {
     console.log(err);
