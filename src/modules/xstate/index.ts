@@ -21,6 +21,17 @@ function getInterpreterFromString(
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
+function interpreterToString(interpreter: any) {
+  const { value, context } = interpreter.state;
+
+  console.log(Date.now(), 'interpreterToString', value, context);
+  const state = {
+    value,
+    context,
+  };
+  return JSON.stringify(state);
+}
+
 export const whatsappStateTransition = async (
   message: any,
   userMetaData: UserMetaData
@@ -67,4 +78,14 @@ export const whatsappStateTransition = async (
     message.text.toLowerCase(),
     userMetaData
   );
+  // giving machine grace period to run invoked actions
+  const startTs = Date.now();
+  const thresholdTs = 3000; // 3 seconds
+  while (whatsappInstance.lock && Date.now() - startTs < thresholdTs) {
+    // eslint-disable-next-line no-await-in-loop
+    await delay(50);
+  }
+  interpreter.stop();
+  const newState = interpreterToString(interpreter);
+  return newState;
 };

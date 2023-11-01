@@ -3,6 +3,8 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import { replyToUser } from '@/utils/replyHelper';
+
 async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
   res.status(200).send('ok');
 }
@@ -15,7 +17,8 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
       // process only the message that comes from user.
       // reply to user
       console.log('reply to user from here');
-      console.log(app, type, payload, req.body);
+      console.log(req.body);
+      await replyToUser(payload);
     }
     res.status(200).send('');
   } catch (e) {
