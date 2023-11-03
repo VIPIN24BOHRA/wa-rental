@@ -58,18 +58,14 @@ describe('Whatsapp Tests', () => {
       expect(res).not.toEqual(null);
     });
 
-    it('should send video with message body and one button', async () => {
+    it('should send video with message body', async () => {
       const message = `this is message`;
 
       const payload: CreateMessagePayload = {
         phoneNumber: TEST_PHONE_NUMBER,
-        type: 'quick_reply',
-        quickContentText: message,
-        quickContentType: 'video',
-        button1Title: 'cancel',
-        quickContentUrl:
-          'https://video.gumlet.io/64b7a399964ce62040a7baf7/6542484d411da17d32fa2388/main.m3u8',
-        quickContentCaption: 'this is caption',
+        type: 'video',
+        caption: message,
+        url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
       };
       const res = await sendMessageToWhatsapp(payload);
       console.log(res);

@@ -146,7 +146,11 @@ function createMessagePayload(payload: CreateMessagePayload) {
         url,
         fileName,
       }),
-      ...((type === 'audio' || type === 'video') && {
+      ...(type === 'video' && {
+        url,
+        ...(caption && { caption }),
+      }),
+      ...(type === 'audio' && {
         url,
       }),
       ...(type === 'list' && {

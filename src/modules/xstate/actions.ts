@@ -193,12 +193,9 @@ export const actionsFactory = (config: MachineConfig): any => {
 
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
-        type: 'quick_reply',
-        quickContentText: message,
-        quickContentType: 'video',
-        quickContentUrl:
-          'https://www.shutterstock.com/shutterstock/videos/1099171545/preview/stock-footage--d-render-of-monochrome-black-and-white-abstract-art-video-animation-with-surreal-ball-or-sphere.webm',
-        quickContentCaption: '',
+        type: 'video',
+        caption: message,
+        url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
       };
 
       await config.whatsappInstance.send(payload);
