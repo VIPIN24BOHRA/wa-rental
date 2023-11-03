@@ -48,7 +48,7 @@ export const machineFactory = (config: MachineConfig) => {
             ON_MESSAGE: [
               {
                 target: 'default',
-                cond: 'invalidLocationSelected',
+                cond: 'invalidLocationMsg',
                 actions: ['sendInvalidLocationMsg'],
               },
               {
