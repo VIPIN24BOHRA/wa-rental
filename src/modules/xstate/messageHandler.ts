@@ -27,11 +27,7 @@ export const handleMessage = async (
     },
   };
   const state = interpreter.state.value;
-  if (!STATE_ACTION_EVENT_MAP[state]) {
-    await interpreter.send({
-      type: 'UNKNOWN_ISSUE',
-    });
-  } else if (state === State.idle) {
+  if (state === State.idle) {
     if (userMetaData.state) await interpreter.send({ type: 'ON_MESSAGE' });
     else await interpreter.send({ type: 'ON_BOARDING' });
   } else if (state === State.onboarding) {

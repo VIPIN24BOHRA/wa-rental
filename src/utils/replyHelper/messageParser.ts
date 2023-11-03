@@ -6,6 +6,6 @@ export const parseMessage = (messageObj: any) => {
     message:
       messageObj.type === 'text'
         ? messageObj.payload.text
-        : messageObj.payload.reply,
+        : messageObj.payload.title,
   };
 };
