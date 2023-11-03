@@ -40,7 +40,7 @@ describe('Whatsapp Tests', () => {
     });
 
     it('should send text hello with 2 buttons', async () => {
-      const message = `👋 Welcome to Secret App!\n\nShare secrets with your friends anonymously! 👫\n\nYour secret will be anonymously forwarded to a group of your choice without revealing your identity. \n🙋 send “help” for more details. \n\n1️⃣Send Message: Send a secret message 📝💬 in your groups.\n 2️⃣My Groups: See all the groups you can send secret messages to.\n3️⃣New Group: Add the option to send secret message to a new group.`;
+      const message = `this is message`;
 
       const payload: CreateMessagePayload = {
         phoneNumber: TEST_PHONE_NUMBER,
@@ -59,7 +59,7 @@ describe('Whatsapp Tests', () => {
     });
 
     it('should send video with message body and one button', async () => {
-      const message = `👋 Enable Secret Message Sharing 🔒\n\n 1. 📝 Save the provided contact as "Secret App" in your phone's contacts.\n 2. Tap 👥 "Add Participants" inside the group and choose "Secret App" from the contact list.\n 3. If not admin, please ask group admin to add "Secret App" contact.😊`;
+      const message = `this is message`;
 
       const payload: CreateMessagePayload = {
         phoneNumber: TEST_PHONE_NUMBER,
@@ -67,7 +67,8 @@ describe('Whatsapp Tests', () => {
         quickContentText: message,
         quickContentType: 'video',
         button1Title: 'cancel',
-        quickContentUrl: 'https://secretapp.net/assets/videos/adminVideo.mp4',
+        quickContentUrl:
+          'https://video.gumlet.io/64b7a399964ce62040a7baf7/6542484d411da17d32fa2388/main.m3u8',
         quickContentCaption: 'this is caption',
       };
       const res = await sendMessageToWhatsapp(payload);
@@ -76,7 +77,7 @@ describe('Whatsapp Tests', () => {
     });
 
     it('should send list with message body', async () => {
-      const message = `👋inside the group and choose "Secret App" from the contact list.\n 3. If not admin, please ask group admin to add "Secret App" contact.😊`;
+      const message = `this is message`;
 
       const payload: CreateMessagePayload = {
         phoneNumber: TEST_PHONE_NUMBER,
