@@ -85,7 +85,7 @@ export const machineFactory = (config: MachineConfig) => {
             ON_MESSAGE: [
               {
                 target: 'allflats',
-                cond: 'isInvalidLocationSelected',
+                cond: 'isInvalidFlatSelected',
                 actions: 'sendInvalidSelectedLocationMsg',
               },
               {
