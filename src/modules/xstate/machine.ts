@@ -1,6 +1,7 @@
 import { createMachine } from 'xstate';
 
 import { actionsFactory } from './actions';
+import { gaurdsFactory } from './guards';
 import type { MachineConfig, MachineContext } from './machine.types';
 
 export const machineFactory = (config: MachineConfig) => {
@@ -24,15 +25,81 @@ export const machineFactory = (config: MachineConfig) => {
             ON_MESSAGE: {
               target: 'default',
             },
+            ON_BOARDING: {
+              actions: 'sendOnBoardingMsg',
+              target: 'onboarding',
+            },
+          },
+        },
+        onboarding: {
+          on: {
+            START: {
+              target: 'default',
+            },
+            INVALID: {
+              actions: 'sendInvalidOnBoardingMsg',
+              target: 'onboarding',
+            },
           },
         },
         default: {
-          entry: 'sendWelcomeMessage',
-
+          entry: 'sendLocationMessage',
+          on: {
+            ON_MESSAGE: [
+              {
+                target: 'default',
+                cond: 'invalidLocationSelected',
+                actions: ['sendInvalidLocationMsg'],
+              },
+              {
+                target: 'rooms',
+                actions: 'assignLocationFromEvent',
+              },
+            ],
+          },
+        },
+        rooms: {
+          entry: 'sendSelectNoOfRoomsMsg',
           on: {
             ON_MESSAGE: {
+              target: 'budget',
+              actions: 'assignNoOfRoomsFromEvent',
+            },
+            INVALID: {
+              target: 'rooms',
+              actions: 'sendInvalidRoomMsg',
+            },
+          },
+        },
+        budget: {
+          entry: 'sendSelectBudgetMsg',
+          on: {
+            ON_MESSAGE: {
+              target: 'allflats',
+              actions: ['assignBudgetFromEvent', 'sendFlatDetailsList'],
+            },
+          },
+        },
+        allflats: {
+          on: {
+            ON_MESSAGE: [
+              {
+                target: 'allflats',
+                cond: 'isInvalidLocationSelected',
+                actions: 'sendInvalidSelectedLocationMsg',
+              },
+              {
+                target: 'allflats',
+                actions: ['sendFlatDetails'],
+              },
+            ],
+            CANCEL: {
               target: 'idle',
-              actions: ['sendStillInConstructionMessage'],
+              actions: 'sendThanksMsg',
+            },
+            MORE: {
+              target: 'allflats',
+              actions: 'sendMoreFlatLocations',
             },
           },
         },
@@ -40,6 +107,7 @@ export const machineFactory = (config: MachineConfig) => {
     },
     {
       actions: actionsFactory(config),
+      guards: gaurdsFactory(config),
     }
   );
 };
