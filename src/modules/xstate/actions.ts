@@ -3,6 +3,8 @@ import { assign } from 'xstate';
 import type { CreateMessagePayload } from '../whatsapp/whatsapp';
 import type { MachineConfig, WhatsappInstance } from './machine.types';
 
+// const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 async function sendTextMessage(
   whatsappInstance: WhatsappInstance,
   message: string,
@@ -137,39 +139,19 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
 
     sendFlatDetailsList: async () => {
-      const flatArr = [
-        'location 1',
-        'location 2',
-        'location 3',
-        'location 4',
-        'location 5',
-        'location 6',
-        'location 7',
-        'location 8',
-      ];
+      // const flatArr = [
+      //   'location 1',
+      //   'location 2',
+      //   'location 3',
+      //   'location 4',
+      //   'location 5',
+      // ];
+      const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
 
-      const message = 'Great! 🌟\n\nPlease select Flat from the flat list.🏡✨';
-      let payload: CreateMessagePayload = {
+      const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
-        type: 'list',
-        sectionTitle: '',
-        title: 'Select Flat',
-        body: message,
-        listButtonTitle: 'flat list',
-      };
-      const temp: any = {};
-
-      flatArr.forEach((a, index) => {
-        temp[`listDescription${index + 1}`] = 'some description';
-        temp[`listTitle${index + 1}`] = a;
-      });
-      payload = {
-        ...payload,
-        ...temp,
-        listDescription9: 'cancel search flat',
-        listTitle9: 'Cancel',
-        listDescription10: 'get more flats',
-        listTitle10: 'More',
+        type: 'text',
+        text: message,
       };
 
       await config.whatsappInstance.send(payload);
@@ -189,15 +171,28 @@ export const actionsFactory = (config: MachineConfig): any => {
       await config.whatsappInstance.send(payload);
     },
     sendFlatDetails: async () => {
+      // const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
+
+      // const payload: CreateMessagePayload = {
+      //   phoneNumber: config.userMetaData.phonenumber,
+      //   type: 'video',
+      //   caption: message,
+      //   url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
+      // };
+
+      // await config.whatsappInstance.send(payload);
+
       const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
 
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
-        type: 'video',
-        caption: message,
-        url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
+        type: 'quick_reply',
+        button1Title: 'Send Video',
+        quickContentType: 'text',
+        quickContentText: message,
+        quickContentHeader: '',
+        quickContentCaption: '',
       };
-
       await config.whatsappInstance.send(payload);
     },
     sendThanksMsg: async () => {

@@ -90,7 +90,14 @@ export const machineFactory = (config: MachineConfig) => {
               },
               {
                 target: 'allflats',
-                actions: ['sendFlatDetails'],
+
+                actions: [
+                  'sendFlatDetails',
+                  'sendFlatDetails',
+                  'sendFlatDetails',
+                  'sendFlatDetails',
+                  'sendFlatDetails',
+                ],
               },
             ],
             CANCEL: {
