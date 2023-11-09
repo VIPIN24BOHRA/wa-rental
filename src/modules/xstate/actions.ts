@@ -242,6 +242,40 @@ export const actionsFactory = (config: MachineConfig): any => {
         await config.whatsappInstance.send(payload);
       }
     },
+    sendVideoFromEvent: async (context: any, event: any) => {
+      console.log('this is event in send video', event);
+      if (context.videoLinkMap[event.videoId]) {
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'video',
+          // caption: message,
+          url: 'https://secretapp.net/assets/videos/adminVideo.mp4',
+          // url: 'https://gumlet-video-user-uploads.s3-accelerate.dualstack.amazonaws.com/gumlet-user-uploads-prod/64b7a399964ce62040a7baf7/64ea5172869c1d6d33b33a36/origin-64ea5172869c1d6d33b33a36?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA4WNLTXWDGN6RDBVQ%2F20231107%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20231107T130831Z&X-Amz-Expires=3600&X-Amz-Signature=6aa2335a051401823ea540c510e82d0ab503663c12aca1a831966ae58f0b6b07&X-Amz-SignedHeaders=host&x-id=GetObject',
+        };
+        await config.whatsappInstance.send(payload);
+      } else {
+        const message = `Sorry video is not available,\n\n please proceed from start.`;
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Cancel',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
+    },
+    sendInvalidTerminationMsg: async () => {
+      const message =
+        'Sorry, We cannot find the video\n\n *_Terminating start from the beginning_*.';
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendThanksMsg: async () => {
       const message =
         'Sure, You can start from the beginning and search flat again, \n\n Thanks for using our service';

@@ -68,9 +68,21 @@ export const handleMessage = async (
       videoLinkMap,
     });
   } else if (state === State.allflats) {
-    const event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'ON_MESSAGE';
-    await interpreter.send({
-      type: event,
-    });
+    let event = STATE_ACTION_EVENT_MAP[state][userActionId];
+
+    if (userActionId.split(':')[0] === 'get video') {
+      const videoId = userActionId.split(':')[1] ?? '';
+
+      if (interpreter.state.context.videoLinkMap[videoId]) {
+        event = 'GET_VIDEO';
+      } else event = 'INVALID_STOP';
+      await interpreter.send({
+        type: event,
+        videoId,
+      });
+    } else
+      await interpreter.send({
+        type: event,
+      });
   }
 };

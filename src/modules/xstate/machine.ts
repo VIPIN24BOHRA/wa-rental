@@ -93,12 +93,10 @@ export const machineFactory = (config: MachineConfig) => {
         },
         allflats: {
           on: {
-            ON_MESSAGE: [
-              {
-                target: 'allflats',
-                actions: 'sendInvalidSelectedLocationMsg',
-              },
-            ],
+            GET_VIDEO: {
+              target: 'allflats',
+              actions: 'sendVideoFromEvent',
+            },
             CANCEL: {
               target: 'idle',
               actions: 'sendThanksMsg',
@@ -106,6 +104,10 @@ export const machineFactory = (config: MachineConfig) => {
             MORE: {
               target: 'allflats',
               actions: 'sendMoreFlatLocations',
+            },
+            INVALID_STOP: {
+              target: 'idle',
+              actions: 'sendInvalidTerminationMsg',
             },
           },
         },

@@ -13,9 +13,12 @@ describe('ReplyHelper tests', () => {
       const mockMessage = {
         id: 'ABEGkYaYVSEEAhAL3SLAWwHKeKrt6s3FKB0c',
         source: '918x98xx21x4',
-        type: 'text',
+        type: 'button_reply',
         payload: {
-          text: '20k - 40k',
+          title: 'Get Video',
+          id: '',
+          reply: 'Get Video 1',
+          postbackText: '6540cb25411da17d32f00099',
         },
         sender: {
           phone: '916396623229',
