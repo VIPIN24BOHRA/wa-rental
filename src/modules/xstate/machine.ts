@@ -15,6 +15,7 @@ export const machineFactory = (config: MachineConfig) => {
         budget: '',
         noOfRooms: 0,
         currentPage: 1,
+        videoLinkMap: {},
       } as MachineContext,
       predictableActionArguments: true,
       states: {
@@ -95,19 +96,7 @@ export const machineFactory = (config: MachineConfig) => {
             ON_MESSAGE: [
               {
                 target: 'allflats',
-                cond: 'isInvalidFlatSelected',
                 actions: 'sendInvalidSelectedLocationMsg',
-              },
-              {
-                target: 'allflats',
-
-                actions: [
-                  'sendFlatDetails',
-                  'sendFlatDetails',
-                  'sendFlatDetails',
-                  'sendFlatDetails',
-                  'sendFlatDetails',
-                ],
               },
             ],
             CANCEL: {

@@ -75,6 +75,7 @@ export interface CreateMessagePayload {
   button1Title?: string;
   button2Title?: string;
   button3Title?: string;
+  Button1PostBackText?: string;
   longitude?: number;
   lattitude?: number;
   locationName?: string;
@@ -124,6 +125,7 @@ function createMessagePayload(payload: CreateMessagePayload) {
     button1Title,
     button2Title,
     button3Title,
+    Button1PostBackText,
     longitude,
     lattitude,
     locationName,
@@ -295,6 +297,7 @@ function createMessagePayload(payload: CreateMessagePayload) {
                 {
                   type: 'text',
                   title: button1Title,
+                  postbackText: Button1PostBackText ?? '',
                 },
               ]
             : []),

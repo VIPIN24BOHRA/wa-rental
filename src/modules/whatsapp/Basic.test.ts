@@ -32,6 +32,7 @@ describe('Whatsapp Tests', () => {
         button1Title: 'OK',
         quickContentType: 'text',
         quickContentText: 'hello world! how are you',
+        Button1PostBackText: 'hello world',
       };
 
       const res = await sendMessageToWhatsapp(payload);

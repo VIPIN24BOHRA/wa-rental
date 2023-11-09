@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 export const parseMessage = (messageObj: any) => {
   return {
     type: messageObj.type,
@@ -6,6 +7,8 @@ export const parseMessage = (messageObj: any) => {
     message:
       messageObj.type === 'text'
         ? messageObj.payload.text
+        : messageObj.type === 'quick_reply' && messageObj.payload.postbackText
+        ? `${messageObj.payload.title}:${messageObj.payload.postbackText}`
         : messageObj.payload.title,
   };
 };

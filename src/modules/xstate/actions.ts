@@ -27,6 +27,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       budget: () => '',
       noOfRooms: () => 0,
       currentPage: () => 1,
+      videoLinkMap: () => ({}),
     }),
     assignLocationFromEvent: assign({
       longitude: (_, event: any) => event.longitude,
@@ -34,6 +35,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     }),
     assignBudgetFromEvent: assign({
       budget: (_, event: any) => event.budget,
+      videoLinkMap: (_, event: any) => event.videoLinkMap,
     }),
     assignNoOfRoomsFromEvent: assign({
       noOfRooms: (_, event: any) => event.noOfRooms,
@@ -158,11 +160,12 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
-          button1Title: 'Send Video',
+          button1Title: 'Get Video',
           quickContentType: 'text',
           quickContentText: message,
           quickContentHeader: '',
           quickContentCaption: '',
+          Button1PostBackText: flatdetails.videoAssetId,
         };
         await config.whatsappInstance.send(payload);
       }
@@ -175,11 +178,12 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
-          button1Title: 'Send Video',
+          button1Title: 'Get Video',
           quickContentType: 'text',
           quickContentText: message,
           quickContentHeader: '',
           quickContentCaption: '',
+          Button1PostBackText: flatdetails.videoAssetId,
         };
         await config.whatsappInstance.send(payload);
       }
@@ -192,11 +196,12 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
-          button1Title: 'Send Video',
+          button1Title: 'Get Video',
           quickContentType: 'text',
           quickContentText: message,
           quickContentHeader: '',
           quickContentCaption: '',
+          Button1PostBackText: flatdetails.videoAssetId,
         };
         await config.whatsappInstance.send(payload);
       }
@@ -209,11 +214,12 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
-          button1Title: 'Send Video',
+          button1Title: 'Get Video',
           quickContentType: 'text',
           quickContentText: message,
           quickContentHeader: '',
           quickContentCaption: '',
+          Button1PostBackText: flatdetails.videoAssetId,
         };
         await config.whatsappInstance.send(payload);
       }
@@ -226,11 +232,12 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
-          button1Title: 'Send Video',
+          button1Title: 'Get Video',
           quickContentType: 'text',
           quickContentText: message,
           quickContentHeader: '',
           quickContentCaption: '',
+          Button1PostBackText: flatdetails.videoAssetId,
         };
         await config.whatsappInstance.send(payload);
       }

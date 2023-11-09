@@ -55,11 +55,17 @@ export const handleMessage = async (
       ...interpreter.state.context,
       budget: message,
     });
+    const videoLinkMap: any = {};
+    faltDetails.forEach((f: any) => {
+      videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
+    });
+    // console.log(videoLinkMap);
     // console.log(faltDetails);
     await interpreter.send({
       type: 'ON_MESSAGE',
       budget: message,
       flatList: faltDetails,
+      videoLinkMap,
     });
   } else if (state === State.allflats) {
     const event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'ON_MESSAGE';

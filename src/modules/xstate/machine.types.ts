@@ -4,6 +4,11 @@ export interface MachineContext {
   currentPage: number;
   longitude: number;
   latitude: number;
+  videoLinkMap: VideoLinkMap;
+}
+
+export interface VideoLinkMap {
+  [input: string]: string;
 }
 
 export interface UserMetaData {
