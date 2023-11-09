@@ -22,16 +22,15 @@ async function sendTextMessage(
 export const actionsFactory = (config: MachineConfig): any => {
   return {
     assignDefaultValue: assign({
-      message: () => '',
-      location: () => '',
-      budget: () => 0,
+      longitude: () => 0,
+      latitude: () => 0,
+      budget: () => '',
       noOfRooms: () => 0,
-      propertyType: () => '',
-      for: () => '',
-      listing: () => '',
+      currentPage: () => 1,
     }),
     assignLocationFromEvent: assign({
-      location: (_, event: any) => event.location,
+      longitude: (_, event: any) => event.longitude,
+      latitude: (_, event: any) => event.latitude,
     }),
     assignBudgetFromEvent: assign({
       budget: (_, event: any) => event.budget,
@@ -69,7 +68,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       await config.whatsappInstance.send(payload);
     },
     sendLocationMessage: async () => {
-      const message = `👋Hi,\n\n please provide the specific location you're interested in. Make sure to include the sector name for accurate results. \n\n For example, *_Sector 22, CityName_*\n\nLet's find you the perfect home! 🌟🏡✨`;
+      const message = `👋Hi,\n\n please provide the specific location you're interested in. Make sure to include the sector name for accurate results. \n\n For example, *_Sector 22, CityName_*\n*_Sector 43, Gurugram_*\n\nLet's find you the perfect flat nearby! 🌟🏡✨`;
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -133,27 +132,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         listDescription3: 'Comfortable',
         listTitle3: '60k - 80k',
         listDescription4: 'Luxurious',
-        listTitle4: '80k +',
+        listTitle4: '80k - above',
       };
-      await config.whatsappInstance.send(payload);
-    },
-
-    sendFlatDetailsList: async () => {
-      // const flatArr = [
-      //   'location 1',
-      //   'location 2',
-      //   'location 3',
-      //   'location 4',
-      //   'location 5',
-      // ];
-      const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
-
-      const payload: CreateMessagePayload = {
-        phoneNumber: config.userMetaData.phonenumber,
-        type: 'text',
-        text: message,
-      };
-
       await config.whatsappInstance.send(payload);
     },
     isInvalidLocationSelected: async () => {
@@ -170,30 +150,90 @@ export const actionsFactory = (config: MachineConfig): any => {
       };
       await config.whatsappInstance.send(payload);
     },
-    sendFlatDetails: async () => {
-      // const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
+    sendFlatDetails1: async (_context: any, event: any) => {
+      if (event.flatList && event.flatList[0]) {
+        const flatdetails = event.flatList[0];
+        const message = `*Agent Name*: 👤 ${flatdetails.agentName} \n*Address*: 🏠 ${flatdetails.address}\n*Agent Contact*: ☎️ ${flatdetails.agentContact}\n*Price*: 💰 ${flatdetails.price}\n*Bedrooms*: 🛏️ ${flatdetails.rooms}\n*Property Type*: 🏢 ${flatdetails.propertyType}\n*Location URL*: 📍 ${flatdetails.addressLocationUrl}`;
 
-      // const payload: CreateMessagePayload = {
-      //   phoneNumber: config.userMetaData.phonenumber,
-      //   type: 'video',
-      //   caption: message,
-      //   url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
-      // };
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Send Video',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
+    },
+    sendFlatDetails2: async (_context: any, event: any) => {
+      if (event.flatList && event.flatList[1]) {
+        const flatdetails = event.flatList[1];
+        const message = `*Agent Name*: 👤 ${flatdetails.agentName} \n*Address*: 🏠 ${flatdetails.address}\n*Agent Contact*: ☎️ ${flatdetails.agentContact}\n*Price*: 💰 ${flatdetails.price}\n*Bedrooms*: 🛏️ ${flatdetails.rooms}\n*Property Type*: 🏢 ${flatdetails.propertyType}\n*Location URL*: 📍 ${flatdetails.addressLocationUrl}`;
 
-      // await config.whatsappInstance.send(payload);
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Send Video',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
+    },
+    sendFlatDetails3: async (_context: any, event: any) => {
+      if (event.flatList && event.flatList[2]) {
+        const flatdetails = event.flatList[2];
+        const message = `*Agent Name*: 👤 ${flatdetails.agentName} \n*Address*: 🏠 ${flatdetails.address}\n*Agent Contact*: ☎️ ${flatdetails.agentContact}\n*Price*: 💰 ${flatdetails.price}\n*Bedrooms*: 🛏️ ${flatdetails.rooms}\n*Property Type*: 🏢 ${flatdetails.propertyType}\n*Location URL*: 📍 ${flatdetails.addressLocationUrl}`;
 
-      const message = `*Agent Name*: 👤 Vipin Bohra\n*Address*: 🏠 Sector 55, Gurugram, P.No.- 30.A\n*Agent Contact*: ☎️ "9711021188"\n*Price*: 💰 27000\n*Bedrooms*: 🛏️ 3\n*Property Type*: 🏢 "Builder Floor"\n*Location URL*: 📍 https://www.google.com/maps?q=Sector+48,+Gurugram,+Haryana+122001,+India&ftid=0x390d2298ef675275:0x73f8c0834b30d90b`;
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Send Video',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
+    },
+    sendFlatDetails4: async (_context: any, event: any) => {
+      if (event.flatList && event.flatList[3]) {
+        const flatdetails = event.flatList[3];
+        const message = `*Agent Name*: 👤 ${flatdetails.agentName} \n*Address*: 🏠 ${flatdetails.address}\n*Agent Contact*: ☎️ ${flatdetails.agentContact}\n*Price*: 💰 ${flatdetails.price}\n*Bedrooms*: 🛏️ ${flatdetails.rooms}\n*Property Type*: 🏢 ${flatdetails.propertyType}\n*Location URL*: 📍 ${flatdetails.addressLocationUrl}`;
 
-      const payload: CreateMessagePayload = {
-        phoneNumber: config.userMetaData.phonenumber,
-        type: 'quick_reply',
-        button1Title: 'Send Video',
-        quickContentType: 'text',
-        quickContentText: message,
-        quickContentHeader: '',
-        quickContentCaption: '',
-      };
-      await config.whatsappInstance.send(payload);
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Send Video',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
+    },
+    sendFlatDetails5: async (_context: any, event: any) => {
+      if (event.flatList && event.flatList[4]) {
+        const flatdetails = event.flatList[4];
+        const message = `*Agent Name*: 👤 ${flatdetails.agentName} \n*Address*: 🏠 ${flatdetails.address}\n*Agent Contact*: ☎️ ${flatdetails.agentContact}\n*Price*: 💰 ${flatdetails.price}\n*Bedrooms*: 🛏️ ${flatdetails.rooms}\n*Property Type*: 🏢 ${flatdetails.propertyType}\n*Location URL*: 📍 ${flatdetails.addressLocationUrl}`;
+
+        const payload: CreateMessagePayload = {
+          phoneNumber: config.userMetaData.phonenumber,
+          type: 'quick_reply',
+          button1Title: 'Send Video',
+          quickContentType: 'text',
+          quickContentText: message,
+          quickContentHeader: '',
+          quickContentCaption: '',
+        };
+        await config.whatsappInstance.send(payload);
+      }
     },
     sendThanksMsg: async () => {
       const message =

@@ -1,5 +1,8 @@
 /* eslint-disable no-nested-ternary */
 
+import { getFlatDetails } from '@/utils/flatDetailsHelper';
+import { getLatLongFromAddress } from '@/utils/geoLocationHelper';
+
 import type { UserMetaData } from './machine.types';
 
 export const handleMessage = async (
@@ -36,7 +39,9 @@ export const handleMessage = async (
       type: event,
     });
   } else if (state === State.default) {
-    await interpreter.send({ type: 'ON_MESSAGE', location: message });
+    const geoDetails = await getLatLongFromAddress(message);
+    if (!geoDetails) await interpreter.send({ type: 'INVALID' });
+    else await interpreter.send({ type: 'ON_MESSAGE', ...geoDetails });
   } else if (state === State.rooms) {
     if (message) {
       const rooms = Number(message);
@@ -46,7 +51,16 @@ export const handleMessage = async (
     }
   } else if (state === State.budget) {
     // check here if the budget is ok or not;
-    await interpreter.send({ type: 'ON_MESSAGE', budget: message });
+    const faltDetails = await getFlatDetails({
+      ...interpreter.state.context,
+      budget: message,
+    });
+    // console.log(faltDetails);
+    await interpreter.send({
+      type: 'ON_MESSAGE',
+      budget: message,
+      flatList: faltDetails,
+    });
   } else if (state === State.allflats) {
     const event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'ON_MESSAGE';
     await interpreter.send({

@@ -1,10 +1,9 @@
 export interface MachineContext {
-  message: string;
-  location: string;
-  budget: number;
+  budget: string;
   noOfRooms: number;
-  listing: string;
-  for: string;
+  currentPage: number;
+  longitude: number;
+  latitude: number;
 }
 
 export interface UserMetaData {

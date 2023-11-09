@@ -330,6 +330,7 @@ function createMessagePayload(payload: CreateMessagePayload) {
 export async function sendMessageToWhatsapp(payload: CreateMessagePayload) {
   const data = createMessagePayload(payload);
   const res = await makeRequestToWhatsapp(data);
+  // console.log(res);
   if (res?.data?.messages?.length) {
     // eslint-disable-next-line no-console
     console.log(

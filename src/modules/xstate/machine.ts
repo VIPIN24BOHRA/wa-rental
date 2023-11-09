@@ -10,13 +10,11 @@ export const machineFactory = (config: MachineConfig) => {
       id: 'flatDekhoWhatsappMachine',
       initial: 'idle',
       context: {
-        message: '',
-        location: '',
-        budget: 0,
+        longitude: 0,
+        latitude: 0,
+        budget: '',
         noOfRooms: 0,
-        propertyType: '',
-        for: '',
-        listing: '',
+        currentPage: 1,
       } as MachineContext,
       predictableActionArguments: true,
       states: {
@@ -24,6 +22,7 @@ export const machineFactory = (config: MachineConfig) => {
           on: {
             ON_MESSAGE: {
               target: 'default',
+              actions: 'assignDefaultValue',
             },
             ON_BOARDING: {
               actions: 'sendOnBoardingMsg',
@@ -56,6 +55,10 @@ export const machineFactory = (config: MachineConfig) => {
                 actions: 'assignLocationFromEvent',
               },
             ],
+            INVALID: {
+              target: 'default',
+              actions: ['sendInvalidLocationMsg'],
+            },
           },
         },
         rooms: {
@@ -76,7 +79,14 @@ export const machineFactory = (config: MachineConfig) => {
           on: {
             ON_MESSAGE: {
               target: 'allflats',
-              actions: ['assignBudgetFromEvent', 'sendFlatDetailsList'],
+              actions: [
+                'assignBudgetFromEvent',
+                'sendFlatDetails1',
+                'sendFlatDetails2',
+                'sendFlatDetails3',
+                'sendFlatDetails4',
+                'sendFlatDetails5',
+              ],
             },
           },
         },
