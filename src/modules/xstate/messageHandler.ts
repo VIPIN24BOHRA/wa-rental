@@ -55,6 +55,7 @@ export const handleMessage = async (
       ...interpreter.state.context,
       budget: message,
     });
+    if (!faltDetails.length) await interpreter.send({ type: 'NO_FLATS' });
     const videoLinkMap: any = {};
     faltDetails.forEach((f: any) => {
       videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
@@ -62,8 +63,9 @@ export const handleMessage = async (
     // console.log(videoLinkMap);
     // console.log(faltDetails);
     await interpreter.send({
-      type: 'ON_MESSAGE',
+      type: 'SEND_FLAT_DETAILS',
       budget: message,
+      currentPage: interpreter.state.context.currentPage + 1,
       flatList: faltDetails,
       videoLinkMap,
     });
@@ -79,6 +81,22 @@ export const handleMessage = async (
       await interpreter.send({
         type: event,
         videoId,
+      });
+    } else if (event === 'MORE') {
+      // check here if the budget is ok or not;
+      const faltDetails = await getFlatDetails({
+        ...interpreter.state.context,
+      });
+      if (!faltDetails.length) await interpreter.send({ type: 'NO_FLATS' });
+      const videoLinkMap: any = {};
+      faltDetails.forEach((f: any) => {
+        videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
+      });
+      await interpreter.send({
+        type: event,
+        currentPage: interpreter.state.context.currentPage + 1,
+        flatList: faltDetails,
+        videoLinkMap,
       });
     } else
       await interpreter.send({

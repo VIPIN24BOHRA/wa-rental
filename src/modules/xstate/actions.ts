@@ -36,6 +36,11 @@ export const actionsFactory = (config: MachineConfig): any => {
     assignBudgetFromEvent: assign({
       budget: (_, event: any) => event.budget,
       videoLinkMap: (_, event: any) => event.videoLinkMap,
+      currentPage: (_, event: any) => event.currentPage,
+    }),
+    assignFlatsListFromEvent: assign({
+      videoLinkMap: (_, event: any) => event.videoLinkMap,
+      currentPage: (_, event: any) => event.currentPage,
     }),
     assignNoOfRoomsFromEvent: assign({
       noOfRooms: (_, event: any) => event.noOfRooms,
@@ -267,9 +272,18 @@ export const actionsFactory = (config: MachineConfig): any => {
         await config.whatsappInstance.send(payload);
       }
     },
+    sendNoFlatDetails: async () => {
+      const message =
+        'Sorry, We cannot find the flats.\n\n *_Terminating, you can start from the beginning_*.';
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendInvalidTerminationMsg: async () => {
       const message =
-        'Sorry, We cannot find the video\n\n *_Terminating start from the beginning_*.';
+        'Sorry, We cannot find the video\n\n *_Terminating, you can start from the beginning_*.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -278,7 +292,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendThanksMsg: async () => {
       const message =
-        'Sure, You can start from the beginning and search flat again, \n\n Thanks for using our service';
+        'Certainly! 🏡 You can start from the beginning and search for a flat again.\n\n Thanks for using our service! 🙌';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -299,6 +313,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       };
       await config.whatsappInstance.send(payload);
     },
+    sendMoreFlatLocations: async () => {},
     sendWelcomeMessage: async () => {
       const message = ` Welcome to flat dekho! \n\nSave this Account to get the best flat at your door 🔒\n\n 1. 📝 Search flat by location.\n 2. filter by budget\n 3. If your are a Bachelor or Family Person, do filter here easily and get flat in just one click.😊`;
       await sendTextMessage(

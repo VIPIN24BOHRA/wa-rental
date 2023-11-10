@@ -78,7 +78,7 @@ export const machineFactory = (config: MachineConfig) => {
         budget: {
           entry: 'sendSelectBudgetMsg',
           on: {
-            ON_MESSAGE: {
+            SEND_FLAT_DETAILS: {
               target: 'allflats',
               actions: [
                 'assignBudgetFromEvent',
@@ -88,6 +88,10 @@ export const machineFactory = (config: MachineConfig) => {
                 'sendFlatDetails4',
                 'sendFlatDetails5',
               ],
+            },
+            NO_FLATS: {
+              target: 'idle',
+              actions: 'sendNoFlatDetails',
             },
           },
         },
@@ -104,7 +108,18 @@ export const machineFactory = (config: MachineConfig) => {
             },
             MORE: {
               target: 'allflats',
-              actions: 'sendMoreFlatLocations',
+              actions: [
+                'assignFlatsListFromEvent',
+                'sendFlatDetails1',
+                'sendFlatDetails2',
+                'sendFlatDetails3',
+                'sendFlatDetails4',
+                'sendFlatDetails5',
+              ],
+            },
+            NO_FLATS: {
+              target: 'idle',
+              actions: 'sendNoFlatDetails',
             },
             INVALID_STOP: {
               target: 'idle',
