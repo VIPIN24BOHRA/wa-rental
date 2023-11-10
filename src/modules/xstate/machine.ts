@@ -92,6 +92,7 @@ export const machineFactory = (config: MachineConfig) => {
           },
         },
         allflats: {
+          entry: ['sendOptionForMoreAndCancel'],
           on: {
             GET_VIDEO: {
               target: 'allflats',

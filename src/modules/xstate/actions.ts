@@ -285,6 +285,20 @@ export const actionsFactory = (config: MachineConfig): any => {
         config.userMetaData.phonenumber
       );
     },
+    sendOptionForMoreAndCancel: async () => {
+      const message = `👋 Hello!\n\nTo continue and explore more results, click on *"More"* If you want to start from the beginning, simply click on *"Cancel"*\n\n🔍 More - For additional results.\n🔄 Cancel - To start afresh.`;
+      const payload: CreateMessagePayload = {
+        phoneNumber: config.userMetaData.phonenumber,
+        type: 'quick_reply',
+        button1Title: 'More',
+        button2Title: 'Cancel',
+        quickContentType: 'text',
+        quickContentText: message,
+        quickContentHeader: '',
+        quickContentCaption: '',
+      };
+      await config.whatsappInstance.send(payload);
+    },
     sendWelcomeMessage: async () => {
       const message = ` Welcome to flat dekho! \n\nSave this Account to get the best flat at your door 🔒\n\n 1. 📝 Search flat by location.\n 2. filter by budget\n 3. If your are a Bachelor or Family Person, do filter here easily and get flat in just one click.😊`;
       await sendTextMessage(
