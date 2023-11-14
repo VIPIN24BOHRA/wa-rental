@@ -253,8 +253,7 @@ export const actionsFactory = (config: MachineConfig): any => {
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'video',
-          url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
-          // url: 'https://gumlet-video-user-uploads.s3-accelerate.dualstack.amazonaws.com/gumlet-user-uploads-prod/64b7a399964ce62040a7baf7/64ea5172869c1d6d33b33a36/origin-64ea5172869c1d6d33b33a36?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA4WNLTXWDGN6RDBVQ%2F20231107%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20231107T130831Z&X-Amz-Expires=3600&X-Amz-Signature=6aa2335a051401823ea540c510e82d0ab503663c12aca1a831966ae58f0b6b07&X-Amz-SignedHeaders=host&x-id=GetObject',
+          url: context.videoLinkMap[event.videoId],
         };
         await config.whatsappInstance.send(payload);
       } else {
