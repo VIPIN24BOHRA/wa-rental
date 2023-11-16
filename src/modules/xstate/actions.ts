@@ -160,15 +160,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     sendFlatDetails1: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[0]) {
         const flatdetails = event.flatList[0];
-        const message = `*Rooms*- ${flatdetails.tagLine} \n*Rent*- ${
+        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address*- ${flatdetails.address}\n*For*- 💰 ${
+        }\n*Address* - ${flatdetails.address}\n*For* - ${
           flatdetails.for
-        }\n*Avalilable from*- 🛏️ ${new Date(
+        }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toDateString()}\n*Owner*- 🏢 ${
+        ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
-        }\n*Property Code*- 📍 ${flatdetails.propertyCode}`;
+        }\n*Property Code* - ${flatdetails.propertyCode}`;
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
@@ -185,16 +185,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     sendFlatDetails2: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[1]) {
         const flatdetails = event.flatList[1];
-        const message = `*Rooms*- ${flatdetails.tagLine} \n*Rent*- ${
+        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address*- ${flatdetails.address}\n*For*- 💰 ${
+        }\n*Address* - ${flatdetails.address}\n*For* - ${
           flatdetails.for
-        }\n*Avalilable from*- 🛏️ ${new Date(
+        }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toDateString()}\n*Owner*- 🏢 ${
+        ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
-        }\n*Property Code*- 📍 ${flatdetails.propertyCode}`;
-
+        }\n*Property Code* - ${flatdetails.propertyCode}`;
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
@@ -211,15 +210,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     sendFlatDetails3: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[2]) {
         const flatdetails = event.flatList[2];
-        const message = `*Rooms*- ${flatdetails.tagLine} \n*Rent*- ${
+        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address*- ${flatdetails.address}\n*For*- 💰 ${
+        }\n*Address* - ${flatdetails.address}\n*For* - ${
           flatdetails.for
-        }\n*Avalilable from*- 🛏️ ${new Date(
+        }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toDateString()}\n*Owner*- 🏢 ${
+        ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
-        }\n*Property Code*- 📍 ${flatdetails.propertyCode}`;
+        }\n*Property Code* - ${flatdetails.propertyCode}`;
 
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
@@ -237,15 +236,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     sendFlatDetails4: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[3]) {
         const flatdetails = event.flatList[3];
-        const message = `*Rooms*- ${flatdetails.tagLine} \n*Rent*- ${
+        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address*- ${flatdetails.address}\n*For*- 💰 ${
+        }\n*Address* - ${flatdetails.address}\n*For* - ${
           flatdetails.for
-        }\n*Avalilable from*- 🛏️ ${new Date(
+        }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toDateString()}\n*Owner*- 🏢 ${
+        ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
-        }\n*Property Code*- 📍 ${flatdetails.propertyCode}`;
+        }\n*Property Code* - ${flatdetails.propertyCode}`;
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
@@ -262,15 +261,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     sendFlatDetails5: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[4]) {
         const flatdetails = event.flatList[4];
-        const message = `*Rooms*- ${flatdetails.tagLine} \n*Rent*- ${
+        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address*- ${flatdetails.address}\n*For*- 💰 ${
+        }\n*Address* - ${flatdetails.address}\n*For* - ${
           flatdetails.for
-        }\n*Avalilable from*- 🛏️ ${new Date(
+        }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toDateString()}\n*Owner*- 🏢 ${
+        ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
-        }\n*Property Code*- 📍 ${flatdetails.propertyCode}`;
+        }\n*Property Code* - ${flatdetails.propertyCode}`;
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
