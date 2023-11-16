@@ -162,7 +162,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         const flatdetails = event.flatList[0];
         const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*For* - ${
+        }\n*Address* - ${flatdetails.address}\n
+        *Floor* - ${flatdetails.floorNo}\n*For* - ${
           flatdetails.for
         }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
@@ -187,7 +188,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         const flatdetails = event.flatList[1];
         const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*For* - ${
+        }\n*Address* - ${flatdetails.address}\n
+        *Floor* - ${flatdetails.floorNo}\n*For* - ${
           flatdetails.for
         }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
@@ -212,7 +214,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         const flatdetails = event.flatList[2];
         const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*For* - ${
+        }\n*Address* - ${flatdetails.address}\n
+        *Floor* - ${flatdetails.floorNo}\n*For* - ${
           flatdetails.for
         }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
@@ -238,13 +241,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         const flatdetails = event.flatList[3];
         const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*For* - ${
+        }\n*Address* - ${flatdetails.address}\n
+        *Floor* - ${flatdetails.floorNo}\n*For* - ${
           flatdetails.for
         }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
         ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
+
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
@@ -263,13 +268,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         const flatdetails = event.flatList[4];
         const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
           flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*For* - ${
+        }\n*Address* - ${flatdetails.address}\n
+        *Floor* - ${flatdetails.floorNo}\n*For* - ${
           flatdetails.for
         }\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
         ).toLocaleDateString()}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
+
         const payload: CreateMessagePayload = {
           phoneNumber: config.userMetaData.phonenumber,
           type: 'quick_reply',
