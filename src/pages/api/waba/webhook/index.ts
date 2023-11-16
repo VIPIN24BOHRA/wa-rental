@@ -16,6 +16,7 @@ async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
 async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { app, type, payload } = req.body;
+    console.log(req.body);
 
     if (app === process.env.APP_NAME && type === 'message') {
       // process only the message that comes from user.
