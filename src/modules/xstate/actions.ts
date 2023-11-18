@@ -84,7 +84,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendInvalidLocationMsg: async () => {
       const message =
-        "⚠️ Oops!\n\nIt seems you've provided an invalid input.\n\nLet's give it another try.";
+        '⚠️ Oops!\n\n apne galat location dali hain.\n\n dobara try krein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
