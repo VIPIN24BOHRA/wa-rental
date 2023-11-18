@@ -103,7 +103,7 @@ export const machineFactory = (config: MachineConfig) => {
           on: {
             GET_VIDEO: {
               target: 'allflats',
-              actions: ['sendOptionForMoreAndCancel', 'sendVideoFromEvent'],
+              actions: ['sendVideoFromEvent'],
             },
             CANCEL: {
               target: 'idle',
