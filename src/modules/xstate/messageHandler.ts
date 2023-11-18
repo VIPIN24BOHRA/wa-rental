@@ -25,7 +25,7 @@ export const handleMessage = async (
       start: 'START',
     },
     [State.allflats]: {
-      cancel: 'CANCEL',
+      refresh: 'REFRESH',
       more: 'MORE',
     },
   };
