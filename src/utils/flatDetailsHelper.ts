@@ -5,6 +5,7 @@ import type { MachineContext } from '@/modules/xstate/machine.types';
 export const getFlatDetails = async (userState: MachineContext) => {
   let minPrice = userState.budget.split('-')[0]?.replace('k', '000')?.trim();
   let maxPrice = userState.budget.split('-')[1]?.replace('k', '000')?.trim();
+
   if (Number.isNaN(Number(maxPrice))) {
     maxPrice = '0';
   }

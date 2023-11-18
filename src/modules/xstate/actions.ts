@@ -82,6 +82,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         config.userMetaData.phonenumber
       );
     },
+    sendInvalidBudgetMsg: async () => {
+      const message =
+        '⚠️ Oops!\n\n apne galat budget dala hain.\n\n dobara try krein.';
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendInvalidLocationMsg: async () => {
       const message =
         '⚠️ Oops!\n\n apne galat location dali hain.\n\n dobara try krein.';
@@ -115,7 +124,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendInvalidRoomMsg: async () => {
       const message =
-        "⚠️ Oops!\n\nIt seems you've provided an invalid input.\n\nLet's give it another try.\n\n please select correct room";
+        '⚠️ Oops!\n\napne galat room no. dala hain.\n\ndobara try karein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,

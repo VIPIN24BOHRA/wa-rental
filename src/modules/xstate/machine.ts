@@ -93,6 +93,10 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'idle',
               actions: 'sendNoFlatDetails',
             },
+            INVALID: {
+              target: 'budget',
+              actions: 'sendInvalidBudgetMsg',
+            },
           },
         },
         allflats: {
