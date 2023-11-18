@@ -166,7 +166,9 @@ export const actionsFactory = (config: MachineConfig): any => {
           flatdetails.floorNo
         }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toLocaleDateString()}\n*Owner* - ${
+        )
+          .toDateString()
+          .slice(3)}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
         const payload: CreateMessagePayload = {
@@ -191,7 +193,9 @@ export const actionsFactory = (config: MachineConfig): any => {
           flatdetails.floorNo
         }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toLocaleDateString()}\n*Owner* - ${
+        )
+          .toDateString()
+          .slice(3)}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
 
@@ -217,7 +221,9 @@ export const actionsFactory = (config: MachineConfig): any => {
           flatdetails.floorNo
         }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toLocaleDateString()}\n*Owner* - ${
+        )
+          .toDateString()
+          .slice(3)}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
 
@@ -243,7 +249,9 @@ export const actionsFactory = (config: MachineConfig): any => {
           flatdetails.floorNo
         }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toLocaleDateString()}\n*Owner* - ${
+        )
+          .toDateString()
+          .slice(3)}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
 
@@ -269,7 +277,9 @@ export const actionsFactory = (config: MachineConfig): any => {
           flatdetails.floorNo
         }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
           flatdetails.availableFrom
-        ).toLocaleDateString()}\n*Owner* - ${
+        )
+          .toDateString()
+          .slice(3)}\n*Owner* - ${
           flatdetails.agentContact
         }\n*Property Code* - ${flatdetails.propertyCode}`;
 
