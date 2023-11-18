@@ -10,7 +10,7 @@ jest.setTimeout(20000);
 describe('Whatsapp Tests', () => {
   describe('send various messages', () => {
     it('should get the latitude and longitude details using address', async () => {
-      const address = 'sector 29, gurugram     ,';
+      const address = 'sector 43,   Gurugram ';
       const details = await getLatLongFromAddress(address);
       console.log(details);
       expect(details).not.toEqual(null);

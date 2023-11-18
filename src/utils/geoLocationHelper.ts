@@ -3,8 +3,9 @@ import axios from 'axios';
 import process from 'process';
 
 export const getLatLongFromAddress = async (address: string) => {
+  if (!address.includes('Gurugram')) address += ', Gurugram';
   if (!address.includes('India')) address += ', India';
-
+  // console.log(address);
   try {
     const response = await axios.get(
       'https://maps.googleapis.com/maps/api/geocode/json',

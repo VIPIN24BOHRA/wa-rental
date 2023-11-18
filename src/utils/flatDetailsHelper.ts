@@ -14,7 +14,7 @@ export const getFlatDetails = async (userState: MachineContext) => {
   // make sure the budget saving in user state is in format "20k - 40k" | "40k - 60k" | "60k - 80k" | "80k - above"
   const payload = {
     currentPage: userState.currentPage,
-    pageSize: 5,
+    pageSize: 4,
     longitude: userState.longitude,
     latitude: userState.latitude,
     rooms: [`${userState.noOfRooms}`],
