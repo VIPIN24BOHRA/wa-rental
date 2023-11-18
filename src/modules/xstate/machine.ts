@@ -93,13 +93,17 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'idle',
               actions: 'sendNoFlatDetails',
             },
+            INVALID: {
+              target: 'budget',
+              actions: 'sendInvalidBudgetMsg',
+            },
           },
         },
         allflats: {
           on: {
             GET_VIDEO: {
               target: 'allflats',
-              actions: ['sendOptionForMoreAndCancel', 'sendVideoFromEvent'],
+              actions: ['sendVideoFromEvent'],
             },
             CANCEL: {
               target: 'idle',

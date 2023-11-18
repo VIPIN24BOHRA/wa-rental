@@ -82,9 +82,18 @@ export const actionsFactory = (config: MachineConfig): any => {
         config.userMetaData.phonenumber
       );
     },
+    sendInvalidBudgetMsg: async () => {
+      const message =
+        '⚠️ Oops!\n\n apne galat budget dala hain.\n\n dobara try krein.';
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendInvalidLocationMsg: async () => {
       const message =
-        "⚠️ Oops!\n\nIt seems you've provided an invalid input.\n\nLet's give it another try.";
+        '⚠️ Oops!\n\n apne galat location dali hain.\n\n dobara try krein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -115,7 +124,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendInvalidRoomMsg: async () => {
       const message =
-        "⚠️ Oops!\n\nIt seems you've provided an invalid input.\n\nLet's give it another try.\n\n please select correct room";
+        '⚠️ Oops!\n\napne galat room no. dala hain.\n\ndobara try karein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -337,11 +346,17 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendThanksMsg: async () => {
       const message = 'Great! 🏡 ab aap shuru se start kr sakte hai. 🙌';
-      await sendTextMessage(
-        config.whatsappInstance,
-        message,
-        config.userMetaData.phonenumber
-      );
+      const payload: CreateMessagePayload = {
+        phoneNumber: config.userMetaData.phonenumber,
+        type: 'quick_reply',
+        button1Title: 'Start',
+        quickContentType: 'text',
+        quickContentText: message,
+        quickContentHeader: '',
+        quickContentCaption: '',
+      };
+
+      await config.whatsappInstance.send(payload);
     },
     sendOptionForMoreAndCancel: async () => {
       const message = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.\n\nIsi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *‘Cancel’* button pr click krein.`;

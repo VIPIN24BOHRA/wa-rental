@@ -51,6 +51,11 @@ export const handleMessage = async (
     }
   } else if (state === State.budget) {
     // check here if the budget is ok or not;
+
+    if (message.split('-').length < 2) {
+      await interpreter.send({ type: 'INVALID' });
+      return;
+    }
     const faltDetails = await getFlatDetails({
       ...interpreter.state.context,
       budget: message,
@@ -60,8 +65,7 @@ export const handleMessage = async (
     faltDetails.forEach((f: any) => {
       videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
     });
-    // console.log(videoLinkMap);
-    // console.log(faltDetails);
+
     await interpreter.send({
       type: 'SEND_FLAT_DETAILS',
       budget: message,
