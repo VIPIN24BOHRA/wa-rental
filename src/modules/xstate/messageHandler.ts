@@ -4,6 +4,7 @@ import { getFlatDetails } from '@/utils/flatDetailsHelper';
 import { getLatLongFromAddress } from '@/utils/geoLocationHelper';
 
 import type { UserMetaData } from './machine.types';
+import { sendFlatDetails } from './sendFlatDetails';
 
 export const handleMessage = async (
   interpreter: any,
@@ -56,6 +57,7 @@ export const handleMessage = async (
       await interpreter.send({ type: 'INVALID' });
       return;
     }
+
     const faltDetails = await getFlatDetails({
       ...interpreter.state.context,
       budget: message,
@@ -66,6 +68,7 @@ export const handleMessage = async (
       videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
     });
 
+    await sendFlatDetails(faltDetails, userMetaData);
     await interpreter.send({
       type: 'SEND_FLAT_DETAILS',
       budget: message,
@@ -74,7 +77,7 @@ export const handleMessage = async (
       videoLinkMap,
     });
   } else if (state === State.allflats) {
-    let event = STATE_ACTION_EVENT_MAP[state][userActionId];
+    let event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'INVALID';
 
     if (userActionId.split(':')[0] === 'get video') {
       const videoId = userActionId.split(':')[1] ?? '';
@@ -96,6 +99,7 @@ export const handleMessage = async (
       faltDetails.forEach((f: any) => {
         videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
       });
+      await sendFlatDetails(faltDetails, userMetaData);
       await interpreter.send({
         type: event,
         currentPage: interpreter.state.context.currentPage + 1,

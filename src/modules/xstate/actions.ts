@@ -1,6 +1,6 @@
 import { assign } from 'xstate';
 
-import type { CreateMessagePayload } from '../whatsapp/whatsapp';
+import { type CreateMessagePayload } from '../whatsapp/whatsapp';
 import type { MachineConfig, WhatsappInstance } from './machine.types';
 
 // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -168,152 +168,36 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendFlatDetails1: async (_context: any, event: any) => {
       if (event.flatList && event.flatList[0]) {
-        const flatdetails = event.flatList[0];
-        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
-          flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-          flatdetails.floorNo
-        }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-          flatdetails.availableFrom
-        )
-          .toDateString()
-          .slice(3)}\n*Owner* - ${
-          flatdetails.agentContact
-        }\n*Property Code* - ${flatdetails.propertyCode}`;
-        const payload: CreateMessagePayload = {
-          phoneNumber: config.userMetaData.phonenumber,
-          type: 'quick_reply',
-          button1Title: 'Get Video',
-          quickContentType: 'text',
-          quickContentText: message,
-          quickContentHeader: '',
-          quickContentCaption: '',
-          Button1PostBackText: flatdetails.videoAssetId,
-        };
-        const message2 = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.`;
-        await sendTextMessage(
-          config.whatsappInstance,
-          message2,
-          config.userMetaData.phonenumber
-        );
-
-        console.log('calling 1');
-        await config.whatsappInstance.send(payload);
-      }
-    },
-    sendFlatDetails2: async (_context: any, event: any) => {
-      if (event.flatList && event.flatList[1]) {
-        const flatdetails = event.flatList[1];
-        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
-          flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-          flatdetails.floorNo
-        }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-          flatdetails.availableFrom
-        )
-          .toDateString()
-          .slice(3)}\n*Owner* - ${
-          flatdetails.agentContact
-        }\n*Property Code* - ${flatdetails.propertyCode}`;
-
-        const payload: CreateMessagePayload = {
-          phoneNumber: config.userMetaData.phonenumber,
-          type: 'quick_reply',
-          button1Title: 'Get Video',
-          quickContentType: 'text',
-          quickContentText: message,
-          quickContentHeader: '',
-          quickContentCaption: '',
-          Button1PostBackText: flatdetails.videoAssetId,
-        };
-        console.log('calling 2');
-        await config.whatsappInstance.send(payload);
-      }
-    },
-    sendFlatDetails3: async (_context: any, event: any) => {
-      if (event.flatList && event.flatList[2]) {
-        const flatdetails = event.flatList[2];
-        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
-          flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-          flatdetails.floorNo
-        }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-          flatdetails.availableFrom
-        )
-          .toDateString()
-          .slice(3)}\n*Owner* - ${
-          flatdetails.agentContact
-        }\n*Property Code* - ${flatdetails.propertyCode}`;
-
-        const payload: CreateMessagePayload = {
-          phoneNumber: config.userMetaData.phonenumber,
-          type: 'quick_reply',
-          button1Title: 'Get Video',
-          quickContentType: 'text',
-          quickContentText: message,
-          quickContentHeader: '',
-          quickContentCaption: '',
-          Button1PostBackText: flatdetails.videoAssetId,
-        };
-        console.log('calling 3');
-        await config.whatsappInstance.send(payload);
-      }
-    },
-    sendFlatDetails4: async (_context: any, event: any) => {
-      if (event.flatList && event.flatList[3]) {
-        const flatdetails = event.flatList[3];
-        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
-          flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-          flatdetails.floorNo
-        }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-          flatdetails.availableFrom
-        )
-          .toDateString()
-          .slice(3)}\n*Owner* - ${
-          flatdetails.agentContact
-        }\n*Property Code* - ${flatdetails.propertyCode}`;
-
-        const payload: CreateMessagePayload = {
-          phoneNumber: config.userMetaData.phonenumber,
-          type: 'quick_reply',
-          button1Title: 'Get Video',
-          quickContentType: 'text',
-          quickContentText: message,
-          quickContentHeader: '',
-          quickContentCaption: '',
-          Button1PostBackText: flatdetails.videoAssetId,
-        };
-        console.log('calling 4');
-        await config.whatsappInstance.send(payload);
-      }
-    },
-    sendFlatDetails5: async (_context: any, event: any) => {
-      if (event.flatList && event.flatList[4]) {
-        const flatdetails = event.flatList[4];
-        const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
-          flatdetails.price
-        }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-          flatdetails.floorNo
-        }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-          flatdetails.availableFrom
-        )
-          .toDateString()
-          .slice(3)}\n*Owner* - ${
-          flatdetails.agentContact
-        }\n*Property Code* - ${flatdetails.propertyCode}`;
-
-        const payload: CreateMessagePayload = {
-          phoneNumber: config.userMetaData.phonenumber,
-          type: 'quick_reply',
-          button1Title: 'Get Video',
-          quickContentType: 'text',
-          quickContentText: message,
-          quickContentHeader: '',
-          quickContentCaption: '',
-          Button1PostBackText: flatdetails.videoAssetId,
-        };
-        await config.whatsappInstance.send(payload);
+        // console.log('total events length', event.flatList.length);
+        // for (let i = 0; i < event.flatList.length; i++) {
+        //   console.log('calling ', i);
+        //   const flatdetails = event.flatList[i];
+        //   const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
+        //     flatdetails.price
+        //   }\n*Address* - ${flatdetails.address}\n*Floor* - ${
+        //     flatdetails.floorNo
+        //   }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
+        //     flatdetails.availableFrom
+        //   )
+        //     .toDateString()
+        //     .slice(3)}\n*Owner* - ${
+        //     flatdetails.agentContact
+        //   }\n*Property Code* - ${flatdetails.propertyCode}`;
+        //   const payload: CreateMessagePayload = {
+        //     phoneNumber: config.userMetaData.phonenumber,
+        //     type: 'quick_reply',
+        //     button1Title: 'Get Video',
+        //     quickContentType: 'text',
+        //     quickContentText: message,
+        //     quickContentHeader: '',
+        //     quickContentCaption: '',
+        //     Button1PostBackText: flatdetails.videoAssetId,
+        //   };
+        //   // console.log('calling 1');
+        //   await sendMessageToWhatsapp(payload);
+        //   await delay(25);
+        //   // await config.whatsappInstance.send(payload);
+        // }
       }
     },
     sendVideoFromEvent: async (context: any, event: any) => {
@@ -349,6 +233,15 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendInvalidTerminationMsg: async () => {
       const message = `Apologies, but we cannot find the video. 🚫\n\n*_Terminating, you can start from the beginning._* 🔄`;
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
+    sendInvalidMsgInAllFlats: async () => {
+      const message =
+        '⚠️ Oops!\n\napne galat input dala hain.\n\ndobara try karein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,

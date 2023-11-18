@@ -80,14 +80,7 @@ export const machineFactory = (config: MachineConfig) => {
           on: {
             SEND_FLAT_DETAILS: {
               target: 'allflats',
-              actions: [
-                'sendFlatDetails1',
-                'sendFlatDetails2',
-                'sendFlatDetails3',
-                'sendFlatDetails4',
-                'sendOptionForMoreAndCancel',
-                'assignBudgetFromEvent',
-              ],
+              actions: ['sendOptionForMoreAndCancel', 'assignBudgetFromEvent'],
             },
             NO_FLATS: {
               target: 'default',
@@ -109,13 +102,16 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'default',
               actions: 'assignDefaultValue',
             },
+            INVALID: {
+              target: 'allflats',
+              actions: [
+                'sendInvalidMsgInAllFlats',
+                'sendOptionForMoreAndCancel',
+              ],
+            },
             MORE: {
               target: 'allflats',
               actions: [
-                'sendFlatDetails1',
-                'sendFlatDetails2',
-                'sendFlatDetails3',
-                'sendFlatDetails4',
                 'sendOptionForMoreAndCancel',
                 'assignFlatsListFromEvent',
               ],

@@ -43,6 +43,7 @@ export const whatsappStateTransition = async (
     lock: false,
     send: async (payload: any) => {
       if (whatsappInstance.lock) {
+        console.log('whatsapp is locked');
         return delay(50).then(() => whatsappInstance.send(payload));
       }
       whatsappInstance.lock = true;
@@ -71,7 +72,7 @@ export const whatsappStateTransition = async (
       whatsappStateMachine
     );
   }
-
+  console.time('start machine');
   await handleMessage(
     interpreter,
     message.text,
@@ -81,6 +82,7 @@ export const whatsappStateTransition = async (
   // giving machine grace period to run invoked actions
   const startTs = Date.now();
   const thresholdTs = 3000; // 3 seconds
+  console.timeEnd('start machine');
   while (whatsappInstance.lock && Date.now() - startTs < thresholdTs) {
     // eslint-disable-next-line no-await-in-loop
     await delay(50);
