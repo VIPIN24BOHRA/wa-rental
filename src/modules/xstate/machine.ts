@@ -81,16 +81,16 @@ export const machineFactory = (config: MachineConfig) => {
             SEND_FLAT_DETAILS: {
               target: 'allflats',
               actions: [
-                'sendOptionForMoreAndCancel',
                 'sendFlatDetails1',
                 'sendFlatDetails2',
                 'sendFlatDetails3',
                 'sendFlatDetails4',
+                'sendOptionForMoreAndCancel',
                 'assignBudgetFromEvent',
               ],
             },
             NO_FLATS: {
-              target: 'idle',
+              target: 'default',
               actions: 'sendNoFlatDetails',
             },
             INVALID: {
@@ -105,18 +105,18 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'allflats',
               actions: ['sendVideoFromEvent'],
             },
-            CANCEL: {
-              target: 'idle',
-              actions: 'sendThanksMsg',
+            REFRESH: {
+              target: 'default',
+              // actions: 'sendThanksMsg',
             },
             MORE: {
               target: 'allflats',
               actions: [
-                'sendOptionForMoreAndCancel',
                 'sendFlatDetails1',
                 'sendFlatDetails2',
                 'sendFlatDetails3',
                 'sendFlatDetails4',
+                'sendOptionForMoreAndCancel',
                 'assignFlatsListFromEvent',
               ],
             },
