@@ -46,7 +46,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       noOfRooms: (_, event: any) => event.noOfRooms,
     }),
     sendOnBoardingMsg: async () => {
-      const message = ` *Welcome to Flat Dekho Bot!* 🏡\n\nHum aapko denge aapki requirement ke according flats ke option🌟\n\nHere's how it works:\n1️⃣ *sector bataye*\n 2️⃣ *apni requirement bataye (no. of rooms, budget etc).*\n 3️⃣ *Hum aapko flats ki details aur owner ka number bhej denge*.\n\nReady to find your ideal flat? Let's get started! Just type *'Start'* to begin your search. ✨🔍 `;
+      const message = ` *Welcome to Flat Dekho Bot!* 🏡\n\nHum aapko denge aapki requirement ke according flats ke option🌟\n\nHere's how it works:\n1️⃣ *sector bataye*\n2️⃣ *apni requirement bataye (no. of rooms, budget etc).*\n3️⃣ *Hum aapko flats ki details aur owner ka number bhej denge*.\n\nReady to find your ideal flat? Let's get started! Just type *'Start'* to begin your search. ✨🔍 `;
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',
@@ -75,8 +75,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       await config.whatsappInstance.send(payload);
     },
     sendLocationMessage: async () => {
-      const message = `👋Hi,\n\n Aapko kaunse sector me property chayiye.\n\n For example, agar aapkoi sector 43 me property chayiye toh likhein -
-      *Sector 43* 🏡✨`;
+      const message = `👋Hi,\n\n Aapko kaunse sector me property chayiye.\n\n For example, agar aapko sector 43 me property chayiye toh likhein - *Sector 43* 🏡✨`;
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -335,8 +334,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       );
     },
     sendOptionForMoreAndCancel: async () => {
-      const message = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.\n\n
-      Isi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *‘Cancel’ button pr click krein.*`;
+      const message = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.\n\nIsi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *‘Cancel’* button pr click krein.`;
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',
