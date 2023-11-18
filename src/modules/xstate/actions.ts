@@ -197,6 +197,7 @@ export const actionsFactory = (config: MachineConfig): any => {
           config.userMetaData.phonenumber
         );
 
+        console.log('calling 1');
         await config.whatsappInstance.send(payload);
       }
     },
@@ -225,6 +226,7 @@ export const actionsFactory = (config: MachineConfig): any => {
           quickContentCaption: '',
           Button1PostBackText: flatdetails.videoAssetId,
         };
+        console.log('calling 2');
         await config.whatsappInstance.send(payload);
       }
     },
@@ -253,6 +255,7 @@ export const actionsFactory = (config: MachineConfig): any => {
           quickContentCaption: '',
           Button1PostBackText: flatdetails.videoAssetId,
         };
+        console.log('calling 3');
         await config.whatsappInstance.send(payload);
       }
     },
@@ -281,6 +284,7 @@ export const actionsFactory = (config: MachineConfig): any => {
           quickContentCaption: '',
           Button1PostBackText: flatdetails.videoAssetId,
         };
+        console.log('calling 4');
         await config.whatsappInstance.send(payload);
       }
     },
