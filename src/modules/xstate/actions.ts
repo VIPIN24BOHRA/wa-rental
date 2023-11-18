@@ -46,7 +46,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       noOfRooms: (_, event: any) => event.noOfRooms,
     }),
     sendOnBoardingMsg: async () => {
-      const message = ` *Welcome to Flat Dekho Bot!* 🏡\n\nLooking for Flat? Look no further! 🌟\n\nWith Flat Dekho , finding the perfect flat is just a chat away! Here's how it works:\n1️⃣ *Select Your Location:* Tell me where you want to live.\n 2️⃣ *Set Your Preferences:* Choose your requirements.\n 3️⃣ *Refine Your Search:* Specify the number of rooms and your price range.\n\nThat's it! 🚀 Flat Dekho Bot will then show you a curated list of flats that match your preferences. Easy, right?\n\nReady to find your ideal flat? Let's get started! Just type 'Start' to begin your search. 🌟✨🔍 `;
+      const message = ` *Welcome to Flat Dekho Bot!* 🏡\n\nHum aapko denge aapki requirement ke according flats ke option🌟\n\nHere's how it works:\n1️⃣ *sector bataye*\n 2️⃣ *apni requirement bataye (no. of rooms, budget etc).*\n 3️⃣ *Hum aapko flats ki details aur owner ka number bhej denge*.\n\nReady to find your ideal flat? Let's get started! Just type *'Start'* to begin your search. ✨🔍 `;
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',
@@ -75,7 +75,8 @@ export const actionsFactory = (config: MachineConfig): any => {
       await config.whatsappInstance.send(payload);
     },
     sendLocationMessage: async () => {
-      const message = `👋Hi,\n\n please provide the specific location you're interested in. Make sure to include the sector name for accurate results. \n\n For example, *_Sector 22, CityName_*\n*_Sector 43, Gurugram_*\n\nLet's find you the perfect flat nearby! 🌟🏡✨`;
+      const message = `👋Hi,\n\n Aapko kaunse sector me property chayiye.\n\n For example, agar aapkoi sector 43 me property chayiye toh likhein -
+      *Sector 43* 🏡✨`;
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -93,7 +94,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendSelectNoOfRoomsMsg: async () => {
       const message =
-        "please choose the number of rooms you prefer from the menu list below.\n\n Let's make sure you find the perfect home! 🌟🏡✨";
+        'Neeche *‘Room list’* ke button par click karein aur bataye ki aapko kitne rooms ki requirment hai.✨';
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'list',
@@ -124,7 +125,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendSelectBudgetMsg: async () => {
       const message =
-        'Great! 🌟\n\nPlease select a price range from the menu list.🏡✨';
+        'Neeche *‘price range’* button pe click karke apna budget bataye 🏡✨';
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'list',
@@ -326,8 +327,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       );
     },
     sendThanksMsg: async () => {
-      const message =
-        'Certainly! 🏡 You can start from the beginning and search for a flat again.\n\n Thanks for using our service! 🙌';
+      const message = 'Great! 🏡 ab aap shuru se start kr sakte hai. 🙌';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -335,7 +335,8 @@ export const actionsFactory = (config: MachineConfig): any => {
       );
     },
     sendOptionForMoreAndCancel: async () => {
-      const message = `👋 Hello!\n\nTo continue and explore more results, click on *"More"* If you want to start from the beginning, simply click on *"Cancel"*\n\n🔍 More - For additional results.\n🔄 Cancel - To start afresh.`;
+      const message = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.\n\n
+      Isi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *‘Cancel’ button pr click krein.*`;
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',
