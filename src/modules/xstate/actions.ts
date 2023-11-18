@@ -346,11 +346,17 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendThanksMsg: async () => {
       const message = 'Great! 🏡 ab aap shuru se start kr sakte hai. 🙌';
-      await sendTextMessage(
-        config.whatsappInstance,
-        message,
-        config.userMetaData.phonenumber
-      );
+      const payload: CreateMessagePayload = {
+        phoneNumber: config.userMetaData.phonenumber,
+        type: 'quick_reply',
+        button1Title: 'Start',
+        quickContentType: 'text',
+        quickContentText: message,
+        quickContentHeader: '',
+        quickContentCaption: '',
+      };
+
+      await config.whatsappInstance.send(payload);
     },
     sendOptionForMoreAndCancel: async () => {
       const message = `👋 Hello!\n\nHumne aapko kuch options diye hai. Inme se kisi bhi property ka video dekhne ke liye *‘Get Video’* button par click karein.\n\nIsi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *‘Cancel’* button pr click krein.`;
