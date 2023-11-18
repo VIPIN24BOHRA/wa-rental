@@ -91,7 +91,7 @@ export const machineFactory = (config: MachineConfig) => {
             },
             NO_FLATS: {
               target: 'default',
-              actions: 'sendNoFlatDetails',
+              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
             },
             INVALID: {
               target: 'budget',
@@ -107,7 +107,7 @@ export const machineFactory = (config: MachineConfig) => {
             },
             REFRESH: {
               target: 'default',
-              // actions: 'sendThanksMsg',
+              actions: 'assignDefaultValue',
             },
             MORE: {
               target: 'allflats',

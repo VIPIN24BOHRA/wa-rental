@@ -13,13 +13,9 @@ describe('ReplyHelper tests', () => {
       const mockMessage = {
         id: 'ABEGkYaYVSEEAhAL3SLAWwHKeKrt6s3FKB0c',
         source: '918x98xx21x4',
-        type: 'list_reply',
+        type: 'text',
         payload: {
-          title: '40k - 60k',
-          id: '',
-          reply: '40k - 60k 1',
-          postbackText: '',
-          description: 'Moderate',
+          text: 'More',
         },
         sender: {
           phone: '916396623229',
