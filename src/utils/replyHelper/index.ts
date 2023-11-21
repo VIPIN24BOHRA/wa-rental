@@ -49,7 +49,7 @@ export const replyToUser = async (messageObj: any) => {
     };
     if (
       newStateObj.value === 'allflats' &&
-      message.toLowerCase() === 'get contact'
+      message.toLowerCase().includes('get contact')
     )
       payload.getContactAttempts++;
 
