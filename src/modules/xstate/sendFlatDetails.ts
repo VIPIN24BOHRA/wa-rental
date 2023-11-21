@@ -31,9 +31,7 @@ export const sendFlatDetails = async (
       flatdetails.availableFrom
     )
       .toDateString()
-      .slice(3)}\n*Owner* - ${flatdetails.agentContact}\n*Property Code* - ${
-      flatdetails.propertyCode
-    }`;
+      .slice(3)}\n*Property Code* - ${flatdetails.propertyCode}`;
     const payload: CreateMessagePayload = {
       phoneNumber: userMetaData.phonenumber,
       type: 'quick_reply',
@@ -43,6 +41,8 @@ export const sendFlatDetails = async (
       quickContentHeader: '',
       quickContentCaption: '',
       Button1PostBackText: flatdetails.videoAssetId,
+      button2Title: 'Get Contact',
+      Button2PostBackText: flatdetails.agentContact,
     };
 
     await sendMessageToWhatsapp(payload);

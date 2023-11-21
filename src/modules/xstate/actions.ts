@@ -200,6 +200,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         // }
       }
     },
+    sendContactFromEvent: async (_context: any, event: any) => {
+      const payload: CreateMessagePayload = {
+        phoneNumber: config.userMetaData.phonenumber,
+        type: 'text',
+        text: `yeh owner ka contact number hai.\n\n *number : ${event.contact}*`,
+      };
+      await config.whatsappInstance.send(payload);
+    },
+
     sendVideoFromEvent: async (context: any, event: any) => {
       console.log('this is event in send video', event);
       if (context.videoLinkMap[event.videoId]) {

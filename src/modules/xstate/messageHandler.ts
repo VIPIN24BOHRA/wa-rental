@@ -28,6 +28,7 @@ export const handleMessage = async (
     [State.allflats]: {
       refresh: 'REFRESH',
       more: 'MORE',
+      'get contact': 'GET_CONTACT',
     },
   };
   const state = interpreter.state.value;
@@ -89,6 +90,14 @@ export const handleMessage = async (
         type: event,
         videoId,
       });
+    } else if (userActionId.split(':')[0] === 'get contact') {
+      const contact = userActionId.split(':')[1] ?? '';
+      if (contact) {
+        await interpreter.send({
+          type: 'GET_CONTACT',
+          contact,
+        });
+      }
     } else if (event === 'MORE') {
       // check here if the budget is ok or not;
       const faltDetails = await getFlatDetails({

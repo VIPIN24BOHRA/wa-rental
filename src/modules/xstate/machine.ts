@@ -98,6 +98,10 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'allflats',
               actions: ['sendVideoFromEvent'],
             },
+            GET_CONTACT: {
+              target: 'allflats',
+              actions: ['sendContactFromEvent'],
+            },
             REFRESH: {
               target: 'default',
               actions: 'assignDefaultValue',
