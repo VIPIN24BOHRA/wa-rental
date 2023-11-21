@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   getUserDetails,
   saveUserState,
@@ -28,14 +29,36 @@ export const replyToUser = async (messageObj: any) => {
       phoneNumber: phonenumber,
       isPremium: false,
       attempts: 0,
-      state: { state: newState ?? '', lastSeenAt: dateObj.getTime() },
+      state: {
+        state: newState ?? '',
+        lastSeenAt: dateObj.getTime(),
+        totalAttempts: 0,
+        getContactAttempts: 0,
+      },
       createdAt: dateObj.getTime(),
       updatedAt: dateObj.getTime(),
     });
   } else {
-    await saveUserState(phonenumber, {
+    const newStateObj = JSON.parse(newState ?? '{}');
+    const oldStateObj = JSON.parse(stateObj.state ?? '{}');
+    const payload = {
+      totalAttempts: stateObj.totalAttempts ?? 0,
+      getContactAttempts: stateObj.getContactAttempts ?? 0,
       state: newState ?? '',
       lastSeenAt: dateObj.getTime(),
-    });
+    };
+    if (
+      newStateObj.value === 'allflats' &&
+      message.toLowerCase() === 'get contact'
+    )
+      payload.getContactAttempts++;
+
+    if (newStateObj.value === 'allflats' && message.toLowerCase() === 'more')
+      payload.totalAttempts++;
+
+    if (newStateObj.value === 'allflats' && oldStateObj.value === 'budget')
+      payload.totalAttempts++;
+
+    await saveUserState(phonenumber, payload);
   }
 };

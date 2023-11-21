@@ -8,6 +8,8 @@ export interface UserDetails {
 }
 
 export interface UserState {
+  totalAttempts: number;
+  getContactAttempts: number;
   state: string;
   lastSeenAt: number;
 }

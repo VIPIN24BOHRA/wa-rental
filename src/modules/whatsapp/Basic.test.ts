@@ -27,13 +27,7 @@ describe('Whatsapp Tests', () => {
         quickContentCaption: 'this is caption',
       };
       const res = await sendMessageToWhatsapp(payload);
-      const res1 = await sendMessageToWhatsapp(payload);
-      await sendMessageToWhatsapp(payload);
-      await sendMessageToWhatsapp(payload);
-      await sendMessageToWhatsapp(payload);
-      await sendMessageToWhatsapp(payload);
-      await sendMessageToWhatsapp(payload);
-      console.log(res, res1);
+
       expect(res).not.toEqual(null);
     });
 
