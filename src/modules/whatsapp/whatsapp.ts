@@ -33,6 +33,38 @@ async function makeRequestToWhatsapp(data: any) {
   }
 }
 
+export const sendTemplateMessage = async (to: any) => {
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    apikey: process.env.API_KEY,
+  };
+
+  const data = {
+    channel: 'whatsapp',
+    source: process.env.PHONE_ID ?? '',
+    destination: to,
+    'src.name': 'FaltDekho',
+    template: '{"id":"02f38725-1091-46eb-aaea-73d40b6fffdb","params":[]}',
+  };
+
+  try {
+    const res = await axios
+      .post(
+        'https://api.gupshup.io/wa/api/v1/template/msg',
+        new URLSearchParams(data),
+        { headers }
+      )
+      .catch((e) => {
+        console.log('Whatsapp service failed', e);
+      });
+    console.log(res);
+    console.log(res?.status === 202 ? 'success' : 'failure');
+    return res;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
 export interface CreateMessagePayload {
   phoneNumber: any;
   type: string;
@@ -336,7 +368,7 @@ function createMessagePayload(payload: CreateMessagePayload) {
 export async function sendMessageToWhatsapp(payload: CreateMessagePayload) {
   const data = createMessagePayload(payload);
   const res = await makeRequestToWhatsapp(data);
-  // console.log(res);
+  console.log(res);
   if (res?.data?.messages?.length) {
     // eslint-disable-next-line no-console
     console.log(

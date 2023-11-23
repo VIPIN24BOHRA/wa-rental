@@ -3,7 +3,7 @@ import console from 'console';
 import process from 'process';
 
 import type { CreateMessagePayload } from './whatsapp';
-import { sendMessageToWhatsapp } from './whatsapp';
+import { sendMessageToWhatsapp, sendTemplateMessage } from './whatsapp';
 
 require('dotenv').config({
   path: '.env.local',
@@ -14,6 +14,12 @@ const { TEST_PHONE_NUMBER } = process.env;
 
 describe('Whatsapp Tests', () => {
   describe('send various messages', () => {
+    it('should send template message', async () => {
+      const res = await sendTemplateMessage(TEST_PHONE_NUMBER);
+
+      expect(res).not.toEqual(null);
+    });
+
     it('should send hello_world template', async () => {
       const payload: CreateMessagePayload = {
         phoneNumber: TEST_PHONE_NUMBER,
