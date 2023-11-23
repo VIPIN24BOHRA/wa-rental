@@ -96,15 +96,22 @@ export const machineFactory = (config: MachineConfig) => {
           on: {
             GET_VIDEO: {
               target: 'allflats',
-              actions: ['sendVideoFromEvent'],
+              actions: ['sendVideoFromEvent', 'sendOptionForMoreAndCancel'],
             },
             GET_CONTACT: {
               target: 'allflats',
-              actions: ['sendContactFromEvent'],
+              actions: ['sendContactFromEvent', 'sendOptionForMoreAndCancel'],
             },
             RESTART: {
               target: 'default',
               actions: 'assignDefaultValue',
+            },
+            THRESHOLD_REACHED: {
+              target: 'allflats',
+              actions: [
+                'sendThresholdReachedMsg',
+                'sendOptionForMoreAndCancel',
+              ],
             },
             INVALID: {
               target: 'default',

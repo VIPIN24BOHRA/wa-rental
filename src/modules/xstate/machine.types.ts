@@ -15,6 +15,8 @@ export interface UserMetaData {
   state?: string;
   phonenumber: string;
   name?: string;
+  totalAttempts?: number;
+  getContactAttempts?: number;
 }
 
 export interface MachineConfig {

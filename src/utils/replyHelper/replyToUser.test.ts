@@ -11,15 +11,18 @@ describe('ReplyHelper tests', () => {
   describe('replyToUser', () => {
     it('should send responses', async () => {
       const mockMessage = {
-        id: 'ABEGkYaYVSEEAhAL3SLAWwHKeKrt6s3FKB0c',
-        source: '918x98xx21x4',
-        type: 'text',
+        id: 'ABEGkWOWYjIpAhBd_PegE8JFRybrLeWH_QE2',
+        source: '916396623229',
+        type: 'button_reply',
         payload: {
-          text: 'Hi',
+          title: 'Get Contact',
+          id: '',
+          reply: 'Get Contact 2',
+          postbackText: '9289845057',
         },
         sender: {
           phone: '916396623229',
-          name: 'Andy',
+          name: 'vipin bohra',
           country_code: '91',
           dial_code: '6396623229',
         },

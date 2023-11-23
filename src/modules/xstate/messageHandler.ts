@@ -91,6 +91,13 @@ export const handleMessage = async (
         videoId,
       });
     } else if (userActionId.split(':')[0] === 'get contact') {
+      if (
+        userMetaData.getContactAttempts &&
+        userMetaData.getContactAttempts >= 5
+      ) {
+        await interpreter.send({ type: 'THRESHOLD_REACHED' });
+        return;
+      }
       const contact = userActionId.split(':')[1] ?? '';
       if (contact) {
         await interpreter.send({

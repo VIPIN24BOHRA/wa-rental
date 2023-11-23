@@ -248,6 +248,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         config.userMetaData.phonenumber
       );
     },
+    sendThresholdReachedMsg: async () => {
+      const message =
+        '⚠️ Oops!\n\napne sare attempts use kr liye h.\n\nbina kisi rukawat ke service use krne ke liye premium service use krein.';
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendInvalidMsgInAllFlats: async () => {
       const message = '⚠️ Oops!\n\napne galat input dala hain.\n\n.';
       await sendTextMessage(
@@ -271,7 +280,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       await config.whatsappInstance.send(payload);
     },
     sendOptionForMoreAndCancel: async () => {
-      const message = `👋 Hello!\n\nIsi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *Refresh* button pr click krein.`;
+      const message = `👋 Hello!\n\nIsi requirment ki aur properties dekhne ke liye *‘More’* button pe click karein. \n\n shuru se start krne ke liye *Restart* button pr click krein.`;
       const payload: CreateMessagePayload = {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',

@@ -20,10 +20,16 @@ export const replyToUser = async (messageObj: any) => {
 
   const newState = await whatsappStateTransition(
     { type: 'text', text: message },
-    { state: stateObj?.state ?? '', name, phonenumber } as UserMetaData
+    {
+      state: stateObj?.state ?? '',
+      name,
+      phonenumber,
+      totalAttempts: stateObj?.totalAttempts ?? 0,
+      getContactAttempts: stateObj?.getContactAttempts ?? 0,
+    } as UserMetaData
   );
   const dateObj = new Date();
-  // save user state;
+  // save user state,
   if (!Object.keys(userDetails).length) {
     await setUserDetails({
       phoneNumber: phonenumber,
