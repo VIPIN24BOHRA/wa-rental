@@ -249,8 +249,7 @@ export const actionsFactory = (config: MachineConfig): any => {
       );
     },
     sendInvalidMsgInAllFlats: async () => {
-      const message =
-        '⚠️ Oops!\n\napne galat input dala hain.\n\ndobara try karein.';
+      const message = '⚠️ Oops!\n\napne galat input dala hain.\n\n.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
@@ -277,7 +276,7 @@ export const actionsFactory = (config: MachineConfig): any => {
         phoneNumber: config.userMetaData.phonenumber,
         type: 'quick_reply',
         button1Title: 'More',
-        button2Title: 'Refresh',
+        button2Title: 'Restart',
         quickContentType: 'text',
         quickContentText: message,
         quickContentHeader: '',

@@ -9,7 +9,7 @@ async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
   res
     .status(200)
     .send(
-      `this is phone number ${process.env.PHONE_ID} this is database url ${process.env.FIREBASE_DATABASE_URL}, this is app name ${process.env.APP_NAME}, these are account basic details`
+      `this is phone number ${process.env.PHONE_ID} this is database url ${process.env.FIREBASE_DATABASE_URL}, these are account basic details`
     );
 }
 

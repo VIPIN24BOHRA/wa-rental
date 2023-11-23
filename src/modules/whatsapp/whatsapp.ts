@@ -57,7 +57,7 @@ export const sendTemplateMessage = async (to: any) => {
       .catch((e) => {
         console.log('Whatsapp service failed', e);
       });
-    console.log(res);
+    // console.log(res);
     console.log(res?.status === 202 ? 'success' : 'failure');
     return res;
   } catch (err) {
@@ -368,7 +368,7 @@ function createMessagePayload(payload: CreateMessagePayload) {
 export async function sendMessageToWhatsapp(payload: CreateMessagePayload) {
   const data = createMessagePayload(payload);
   const res = await makeRequestToWhatsapp(data);
-  console.log(res);
+  // console.log(res);
   if (res?.data?.messages?.length) {
     // eslint-disable-next-line no-console
     console.log(

@@ -102,16 +102,13 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'allflats',
               actions: ['sendContactFromEvent'],
             },
-            REFRESH: {
+            RESTART: {
               target: 'default',
               actions: 'assignDefaultValue',
             },
             INVALID: {
-              target: 'allflats',
-              actions: [
-                'sendInvalidMsgInAllFlats',
-                'sendOptionForMoreAndCancel',
-              ],
+              target: 'default',
+              actions: 'assignDefaultValue',
             },
             MORE: {
               target: 'allflats',
