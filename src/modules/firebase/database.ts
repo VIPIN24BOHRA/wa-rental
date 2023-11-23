@@ -17,6 +17,20 @@ export const getUserDetails = async (phoneNumber: string) => {
   return {} as UserDetails;
 };
 
+export const getAllUserDetails = async () => {
+  const db = admin.database();
+  const ref = db.ref(sanitizePath(`/app/user/`));
+  try {
+    const snap = await ref.once('value');
+    if (snap.exists()) {
+      return Object.values(snap.val()) as UserDetails[];
+    }
+  } catch (err) {
+    console.log('error while getUserDetails', err);
+  }
+  return [] as UserDetails[];
+};
+
 export const setUserDetails = async (user: UserDetails) => {
   const db = admin.database();
   const ref = db.ref(sanitizePath(`/app/user/${user.phoneNumber}`));

@@ -20,5 +20,5 @@ module.exports = withBundleAnalyzer({
   poweredByHeader: false,
   trailingSlash: false,
   basePath: '',
-  reactStrictMode: true,
+  reactStrictMode: false,
 });
