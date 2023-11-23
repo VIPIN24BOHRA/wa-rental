@@ -15,7 +15,7 @@ describe('ReplyHelper tests', () => {
         source: '918x98xx21x4',
         type: 'text',
         payload: {
-          text: 'Hi',
+          text: 'More',
         },
         sender: {
           phone: '916396623229',
