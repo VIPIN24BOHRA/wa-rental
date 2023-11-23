@@ -40,10 +40,10 @@ export const replyToUser = async (messageObj: any) => {
     });
   } else {
     const newStateObj = JSON.parse(newState ?? '{}');
-    const oldStateObj = JSON.parse(stateObj.state ?? '{}');
+    const oldStateObj = JSON.parse(stateObj?.state ?? '{}');
     const payload = {
-      totalAttempts: stateObj.totalAttempts ?? 0,
-      getContactAttempts: stateObj.getContactAttempts ?? 0,
+      totalAttempts: stateObj?.totalAttempts ?? 0,
+      getContactAttempts: stateObj?.getContactAttempts ?? 0,
       state: newState ?? '',
       lastSeenAt: dateObj.getTime(),
     };
