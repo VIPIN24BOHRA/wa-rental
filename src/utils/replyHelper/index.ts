@@ -10,6 +10,13 @@ import type { UserMetaData } from '@/modules/xstate/machine.types';
 import { parseMessage } from './messageParser';
 
 export const replyToUser = async (messageObj: any) => {
+  if (
+    messageObj?.type !== 'text' &&
+    messageObj?.type !== 'button_reply' &&
+    messageObj?.type !== 'list_reply' &&
+    messageObj?.type !== 'quick_reply'
+  )
+    return;
   const { phonenumber, message, name } = parseMessage(messageObj);
 
   // get the user details from db from here.

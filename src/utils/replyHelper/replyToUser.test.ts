@@ -13,8 +13,9 @@ describe('ReplyHelper tests', () => {
       const mockMessage = {
         id: 'ABEGkWOWYjIpAhBd_PegE8JFRybrLeWH_QE2',
         source: '916396623229',
-        type: 'button_reply',
+        type: 'image',
         payload: {
+          text: 'hi',
           title: 'Get Contact',
           id: '',
           reply: 'Get Contact 2',
