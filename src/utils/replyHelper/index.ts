@@ -33,6 +33,7 @@ export const replyToUser = async (messageObj: any) => {
       phonenumber,
       totalAttempts: stateObj?.totalAttempts ?? 0,
       getContactAttempts: stateObj?.getContactAttempts ?? 0,
+      subscribed: userDetails?.subscribed ?? false,
     } as UserMetaData
   );
   const dateObj = new Date();
@@ -40,7 +41,7 @@ export const replyToUser = async (messageObj: any) => {
   if (!Object.keys(userDetails).length) {
     await setUserDetails({
       phoneNumber: phonenumber,
-      isPremium: false,
+      subscribed: false,
       attempts: 0,
       state: {
         state: newState ?? '',

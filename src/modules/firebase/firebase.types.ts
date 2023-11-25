@@ -1,7 +1,7 @@
 export interface UserDetails {
   phoneNumber: string;
   state: UserState;
-  isPremium: false;
+  subscribed?: boolean;
   attempts: number;
   createdAt: number;
   updatedAt: number;

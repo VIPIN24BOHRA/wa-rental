@@ -17,6 +17,7 @@ export interface UserMetaData {
   name?: string;
   totalAttempts?: number;
   getContactAttempts?: number;
+  subscribed?: boolean;
 }
 
 export interface MachineConfig {

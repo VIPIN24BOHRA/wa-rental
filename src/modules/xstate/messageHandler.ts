@@ -92,6 +92,7 @@ export const handleMessage = async (
       });
     } else if (userActionId.split(':')[0] === 'get contact') {
       if (
+        !userMetaData.subscribed &&
         userMetaData.getContactAttempts &&
         userMetaData.getContactAttempts >= 5
       ) {
