@@ -13,3 +13,9 @@ export interface UserState {
   state: string;
   lastSeenAt: number;
 }
+
+export interface LocationDetails {
+  lat: any;
+  lng: any;
+  name?: string;
+}

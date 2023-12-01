@@ -10,6 +10,7 @@ module.exports = withBundleAnalyzer({
     FIREBASE_AUTH_DOMAIN: '',
     FIREBASE_APP_ID: '',
     FIREBASE_MEASUREMENT_ID: '',
+    GOOGLE_MAP_API_KEY: 'AIzaSyAUkjFdSmeGbo_jXyYvuY5YSE0Jfcn8t3U',
   },
   eslint: {
     dirs: ['.'],

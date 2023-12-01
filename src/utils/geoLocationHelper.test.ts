@@ -1,6 +1,10 @@
-import { getLatLongFromAddress } from './geoLocationHelper';
+import {
+  getAddressFromLatLng,
+  getLatLongFromAddress,
+} from './geoLocationHelper';
 
 /* eslint-disable jest/no-commented-out-tests */
+/* eslint-disable no-console */
 require('dotenv').config({
   path: '.env.local',
 });
@@ -12,6 +16,15 @@ describe('Whatsapp Tests', () => {
     it('should get the latitude and longitude details using address', async () => {
       const address = 'Sector 43';
       const details = await getLatLongFromAddress(address);
+      console.log(details);
+      expect(details).not.toEqual(null);
+    });
+
+    it('should get the Address details using lat lng', async () => {
+      const details = await getAddressFromLatLng(
+        '77.05590439999999',
+        '28.432584449999997'
+      );
       console.log(details);
       expect(details).not.toEqual(null);
     });

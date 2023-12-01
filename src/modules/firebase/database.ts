@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 
 import { removeNullKeys, sanitizePath } from './firebase';
-import type { UserDetails, UserState } from './firebase.types';
+import type { LocationDetails, UserDetails, UserState } from './firebase.types';
 
 export const getUserDetails = async (phoneNumber: string) => {
   const db = admin.database();
@@ -40,6 +40,33 @@ export const setUserDetails = async (user: UserDetails) => {
   } catch (err) {
     console.log('error while getUserDetails', err);
   }
+};
+
+export const setLocationDetails = async (loc: LocationDetails) => {
+  const db = admin.database();
+  const ref = db.ref(sanitizePath(`/app/pingLocation/`));
+
+  try {
+    const newPostRef = ref.push();
+    await newPostRef.set(removeNullKeys(loc));
+    console.log('successfully saved user details ', loc);
+  } catch (err) {
+    console.log('error while setLocationDetails', err);
+  }
+};
+
+export const getAllPingLocation = async () => {
+  const db = admin.database();
+  const ref = db.ref(sanitizePath(`/app/pingLocation/`));
+  try {
+    const snap = await ref.once('value');
+    if (snap.exists()) {
+      return Object.values(snap.val()) as LocationDetails[];
+    }
+  } catch (err) {
+    console.log('error while getUserDetails', err);
+  }
+  return [] as LocationDetails[];
 };
 
 export const getUserSavedState = async (phoneNumber: string) => {

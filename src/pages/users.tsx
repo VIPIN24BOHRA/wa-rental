@@ -33,6 +33,7 @@ export default function Users() {
           lastSeenAt: x.state.lastSeenAt,
           getContactAttempts: x.state.getContactAttempts,
           detailsAttempts: x.state.totalAttempts,
+          createdAt: x.createdAt,
         }));
         setAllUsers(users);
         const totalPage = [];
@@ -102,6 +103,9 @@ export default function Users() {
                 last Seen
               </th>
               <th scope="col" className="px-6 py-3">
+                Created At
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Details Attempts
               </th>
               <th scope="col" className="px-6 py-3">
@@ -123,6 +127,13 @@ export default function Users() {
                 </th>
                 <td className="px-6 py-4">
                   {`${new Date(u.lastSeenAt)
+                    .toDateString()
+                    .slice(3)} , ${new Date(
+                    u.lastSeenAt
+                  ).toLocaleTimeString()}`}
+                </td>
+                <td className="px-6 py-4">
+                  {`${new Date(u.createdAt)
                     .toDateString()
                     .slice(3)} , ${new Date(
                     u.lastSeenAt
