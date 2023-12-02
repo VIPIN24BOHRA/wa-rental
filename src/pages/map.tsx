@@ -42,7 +42,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (map) {
+    if (map && isLoaded) {
       const bounds = new window.google.maps.LatLngBounds();
       markers?.map((marker) => {
         bounds.extend({
