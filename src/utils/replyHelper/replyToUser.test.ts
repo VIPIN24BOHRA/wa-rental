@@ -13,13 +13,13 @@ describe('ReplyHelper tests', () => {
       const mockMessage = {
         id: 'ABEGkWOWYjIpAhBd_PegE8JFRybrLeWH_QE2',
         source: '916396623229',
-        type: 'image',
+        type: 'list_reply',
         payload: {
-          text: 'hi',
-          title: 'Get Contact',
+          title: 'any',
           id: '',
-          reply: 'Get Contact 2',
-          postbackText: '9289845057',
+          reply: 'any 1',
+          postbackText: '',
+          description: 'any price',
         },
         sender: {
           phone: '916396623229',
