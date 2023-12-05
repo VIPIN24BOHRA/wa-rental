@@ -47,14 +47,16 @@ export const handleMessage = async (
   } else if (state === State.rooms) {
     if (message) {
       const rooms = Number(message);
-      if (!Number.isNaN(rooms) && rooms > 0 && rooms <= 4)
+      if (message === 'any') {
+        await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: '' });
+      } else if (!Number.isNaN(rooms) && rooms > 0 && rooms <= 4)
         await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: rooms });
       else await interpreter.send({ type: 'INVALID' });
     }
   } else if (state === State.budget) {
     // check here if the budget is ok or not;
 
-    if (message.split('-').length < 2) {
+    if (message !== 'any' && message.split('-').length < 2) {
       await interpreter.send({ type: 'INVALID' });
       return;
     }

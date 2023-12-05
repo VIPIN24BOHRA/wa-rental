@@ -118,6 +118,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         listTitle3: '3',
         listDescription4: 'only 4 room',
         listTitle4: '4',
+        listDescription5: 'any no. of rooms',
+        listTitle5: 'any',
       };
 
       await config.whatsappInstance.send(payload);
@@ -149,6 +151,8 @@ export const actionsFactory = (config: MachineConfig): any => {
         listTitle3: '60k - 80k',
         listDescription4: 'Luxurious',
         listTitle4: '80k - above',
+        listDescription5: 'any price',
+        listTitle5: 'any',
       };
       await config.whatsappInstance.send(payload);
     },
