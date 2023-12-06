@@ -9,6 +9,7 @@ export const machineFactory = (config: MachineConfig) => {
     {
       id: 'flatDekhoWhatsappMachine',
       initial: 'idle',
+
       context: {
         longitude: 0,
         latitude: 0,
@@ -24,6 +25,18 @@ export const machineFactory = (config: MachineConfig) => {
             ON_MESSAGE: {
               target: 'default',
               actions: 'assignDefaultValue',
+            },
+            SEND_FLAT_DETAILS: {
+              target: 'allflats',
+              actions: [
+                'sendOptionForMoreAndCancel',
+                'assignLocationFromEvent',
+              ],
+            },
+            NO_FLATS: {
+              // target: 'default',
+              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
+              target: 'default',
             },
             ON_BOARDING: {
               actions: 'sendOnBoardingMsg',
@@ -63,6 +76,11 @@ export const machineFactory = (config: MachineConfig) => {
                 ],
               },
             ],
+            NO_FLATS: {
+              // target: 'default',
+              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
+              target: 'default',
+            },
             INVALID: {
               target: 'default',
               actions: ['sendInvalidLocationMsg'],

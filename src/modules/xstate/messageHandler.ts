@@ -42,9 +42,36 @@ export const handleMessage = async (
   };
   const state = interpreter.state.value;
   if (state === State.idle) {
-    // if (userMetaData.state)
-    await interpreter.send({ type: 'ON_MESSAGE' });
-    // else await interpreter.send({ type: 'ON_BOARDING' });
+    if (userMetaData.state) await interpreter.send({ type: 'ON_MESSAGE' });
+    else {
+      const geoDetails = await getLatLongFromAddress(message);
+      if (!geoDetails) await interpreter.send({ type: 'ON_MESSAGE' });
+      else {
+        /* this else condition needs to be changed right now its for basic bot */
+        const flatDetails = await getFlatDetails({
+          ...interpreter.state.context,
+          latitude: geoDetails.latitude,
+          longitude: geoDetails.longitude,
+        });
+        if (!flatDetails.length) await interpreter.send({ type: 'NO_FLATS' });
+        const videoLinkMap: any = {};
+        flatDetails.forEach((f: any) => {
+          videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
+        });
+
+        await sendFlatDetails(flatDetails, userMetaData);
+        /* remove code till here */
+        // only send geoDetails if not basic bot.
+        await interpreter.send({
+          type: 'SEND_FLAT_DETAILS',
+          ...geoDetails,
+          currentPage: interpreter.state.context.currentPage + 1,
+          videoLinkMap,
+        });
+      }
+    }
+
+    await interpreter.send({ type: 'ON_BOARDING' });
   } else if (state === State.onboarding) {
     const event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'INVALID';
     await interpreter.send({
