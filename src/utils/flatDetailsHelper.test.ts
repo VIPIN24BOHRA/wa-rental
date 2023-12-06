@@ -14,7 +14,7 @@ describe('Whatsapp Tests', () => {
     it('should get the flat details after using user saved state', async () => {
       const userState: MachineContext = {
         longitude: 77.0662896,
-        budget: 'any',
+        budget: '0 - 20k',
         noOfRooms: 0,
         currentPage: 1,
         latitude: 28.4669058,
