@@ -70,7 +70,7 @@ export const replyToUser = async (messageObj: any) => {
     if (newStateObj.value === 'allflats' && message.toLowerCase() === 'more')
       payload.totalAttempts++;
 
-    if (newStateObj.value === 'allflats' && oldStateObj.value === 'budget')
+    if (newStateObj.value === 'allflats' && oldStateObj.value === 'default')
       payload.totalAttempts++;
 
     await saveUserState(phonenumber, payload);
