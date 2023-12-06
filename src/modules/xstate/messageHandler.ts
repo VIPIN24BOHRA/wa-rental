@@ -6,6 +6,15 @@ import { getLatLongFromAddress } from '@/utils/geoLocationHelper';
 import type { UserMetaData } from './machine.types';
 import { sendFlatDetails } from './sendFlatDetails';
 
+/*
+
+for basic bot changes:-
+
+1. sending from idle to direct default state. check the condition in idle state.
+2. directly sending details after location is selected. check the condition in default state.
+
+*/
+
 export const handleMessage = async (
   interpreter: any,
   message: string,
@@ -33,8 +42,9 @@ export const handleMessage = async (
   };
   const state = interpreter.state.value;
   if (state === State.idle) {
-    if (userMetaData.state) await interpreter.send({ type: 'ON_MESSAGE' });
-    else await interpreter.send({ type: 'ON_BOARDING' });
+    // if (userMetaData.state)
+    await interpreter.send({ type: 'ON_MESSAGE' });
+    // else await interpreter.send({ type: 'ON_BOARDING' });
   } else if (state === State.onboarding) {
     const event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'INVALID';
     await interpreter.send({
@@ -43,7 +53,29 @@ export const handleMessage = async (
   } else if (state === State.default) {
     const geoDetails = await getLatLongFromAddress(message);
     if (!geoDetails) await interpreter.send({ type: 'INVALID' });
-    else await interpreter.send({ type: 'ON_MESSAGE', ...geoDetails });
+    else {
+      /* this else condition needs to be changed right now its for basic bot */
+      const flatDetails = await getFlatDetails({
+        ...interpreter.state.context,
+        latitude: geoDetails.latitude,
+        longitude: geoDetails.longitude,
+      });
+      if (!flatDetails.length) await interpreter.send({ type: 'NO_FLATS' });
+      const videoLinkMap: any = {};
+      flatDetails.forEach((f: any) => {
+        videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
+      });
+
+      await sendFlatDetails(flatDetails, userMetaData);
+      /* remove code till here */
+      // only send geoDetails if not basic bot.
+      await interpreter.send({
+        type: 'ON_MESSAGE',
+        ...geoDetails,
+        currentPage: interpreter.state.context.currentPage + 1,
+        videoLinkMap,
+      });
+    }
   } else if (state === State.rooms) {
     if (message) {
       const rooms = Number(message);

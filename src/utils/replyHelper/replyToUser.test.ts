@@ -13,10 +13,11 @@ describe('ReplyHelper tests', () => {
       const mockMessage = {
         id: 'ABEGkWOWYjIpAhBd_PegE8JFRybrLeWH_QE2',
         source: '916396623229',
-        type: 'list_reply',
+        type: 'text',
         payload: {
           title: 'any',
           id: '',
+          text: '40',
           reply: 'any 1',
           postbackText: '',
           description: 'any price',

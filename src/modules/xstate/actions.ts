@@ -32,6 +32,8 @@ export const actionsFactory = (config: MachineConfig): any => {
     assignLocationFromEvent: assign({
       longitude: (_, event: any) => event.longitude,
       latitude: (_, event: any) => event.latitude,
+      videoLinkMap: (_, event: any) => event.videoLinkMap,
+      currentPage: (_, event: any) => event.currentPage,
     }),
     assignBudgetFromEvent: assign({
       budget: (_, event: any) => event.budget,

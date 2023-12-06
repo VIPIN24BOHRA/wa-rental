@@ -51,9 +51,16 @@ export const machineFactory = (config: MachineConfig) => {
                 cond: 'invalidLocationMsg',
                 actions: ['sendInvalidLocationMsg'],
               },
+              // {
+              //   target: 'rooms',
+              //   actions: 'assignLocationFromEvent',
+              // },
               {
-                target: 'rooms',
-                actions: 'assignLocationFromEvent',
+                target: 'allflats',
+                actions: [
+                  'sendOptionForMoreAndCancel',
+                  'assignLocationFromEvent',
+                ],
               },
             ],
             INVALID: {
@@ -66,12 +73,14 @@ export const machineFactory = (config: MachineConfig) => {
           entry: 'sendSelectNoOfRoomsMsg',
           on: {
             ON_MESSAGE: {
-              target: 'budget',
-              actions: 'assignNoOfRoomsFromEvent',
+              // target: 'budget',
+              target: 'default',
+              // actions: 'assignNoOfRoomsFromEvent',
             },
             INVALID: {
-              target: 'rooms',
-              actions: 'sendInvalidRoomMsg',
+              // target: 'rooms',
+              // actions: 'sendInvalidRoomMsg',
+              target: 'default',
             },
           },
         },
@@ -79,16 +88,19 @@ export const machineFactory = (config: MachineConfig) => {
           entry: 'sendSelectBudgetMsg',
           on: {
             SEND_FLAT_DETAILS: {
-              target: 'allflats',
-              actions: ['sendOptionForMoreAndCancel', 'assignBudgetFromEvent'],
+              // target: 'allflats',
+              // actions: ['sendOptionForMoreAndCancel', 'assignBudgetFromEvent'],
+              target: 'default',
             },
             NO_FLATS: {
+              // target: 'default',
+              // actions: ['sendNoFlatDetails', 'assignDefaultValue'],
               target: 'default',
-              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
             },
             INVALID: {
-              target: 'budget',
-              actions: 'sendInvalidBudgetMsg',
+              // target: 'budget',
+              // actions: 'sendInvalidBudgetMsg',
+              target: 'default',
             },
           },
         },
