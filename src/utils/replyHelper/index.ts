@@ -46,7 +46,7 @@ export const replyToUser = async (messageObj: any) => {
       state: {
         state: newState ?? '',
         lastSeenAt: dateObj.getTime(),
-        totalAttempts: 0,
+        totalAttempts: 1,
         getContactAttempts: 0,
       },
       createdAt: dateObj.getTime(),
