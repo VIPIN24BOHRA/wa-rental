@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-shadow */
 
 'use client';
 
@@ -70,6 +71,15 @@ export default function Users() {
     setCurrentUsers(allUsers.slice((x - 1) * 10, x * 10));
   };
 
+  const handleSortPage = (key: string) => {
+    allUsers.sort(
+      (a: any, b: any) => (b[key] ? b[key] : 0) - (a[key] ? a[key] : 0)
+    );
+    console.log(allUsers);
+    setAllUsers([...allUsers]);
+    setCurrentUsers(allUsers.slice((currentPage - 1) * 10, currentPage * 10));
+  };
+
   return (
     <div className="flex h-screen w-full flex-col items-center">
       <nav className="flex w-full items-center border-b-[1px] px-8 py-4">
@@ -99,13 +109,25 @@ export default function Users() {
               <th scope="col" className="px-6 py-3">
                 contact Number
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th
+                scope="col"
+                className="cursor-pointer px-6 py-3"
+                onClick={() => {
+                  handleSortPage('lastSeenAt');
+                }}
+              >
                 last Seen
               </th>
               <th scope="col" className="px-6 py-3">
                 Created At
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th
+                scope="col"
+                className="cursor-pointer px-6 py-3"
+                onClick={() => {
+                  handleSortPage('detailsAttempts');
+                }}
+              >
                 Details Attempts
               </th>
               <th scope="col" className="px-6 py-3">
@@ -135,9 +157,7 @@ export default function Users() {
                 <td className="px-6 py-4">
                   {`${new Date(u.createdAt)
                     .toDateString()
-                    .slice(3)} , ${new Date(
-                    u.lastSeenAt
-                  ).toLocaleTimeString()}`}
+                    .slice(3)} , ${new Date(u.createdAt).toLocaleTimeString()}`}
                 </td>
                 <td className="px-6 py-4">{u.detailsAttempts}</td>
                 <td className="px-6 py-4">{u.getContactAttempts}</td>
