@@ -15,7 +15,7 @@ describe('Whatsapp Tests', () => {
       const userState: MachineContext = {
         longitude: 77.0662896,
         budget: '0 - 20k',
-        noOfRooms: 0,
+        noOfRooms: 1,
         currentPage: 1,
         latitude: 28.4669058,
         videoLinkMap: {},
