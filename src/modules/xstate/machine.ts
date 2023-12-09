@@ -26,18 +26,20 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'default',
               actions: 'assignDefaultValue',
             },
-            SEND_FLAT_DETAILS: {
-              target: 'allflats',
-              actions: [
-                'sendOptionForMoreAndCancel',
-                'assignLocationFromEvent',
-              ],
-            },
-            NO_FLATS: {
-              // target: 'default',
-              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
-              target: 'default',
-            },
+            /* basic flow */
+
+            // SEND_FLAT_DETAILS: {
+            //   target: 'allflats',
+            //   actions: [
+            //     'sendOptionForMoreAndCancel',
+            //     'assignLocationFromEvent',
+            //   ],
+            // },
+            // NO_FLATS: {
+            //   // target: 'default',
+            //   actions: ['sendNoFlatDetails', 'assignDefaultValue'],
+            //   target: 'default',
+            // },
             ON_BOARDING: {
               actions: 'sendOnBoardingMsg',
               target: 'onboarding',
@@ -64,22 +66,22 @@ export const machineFactory = (config: MachineConfig) => {
                 cond: 'invalidLocationMsg',
                 actions: ['sendInvalidLocationMsg'],
               },
-              // {
-              //   target: 'rooms',
-              //   actions: 'assignLocationFromEvent',
-              // },
               {
-                target: 'allflats',
-                actions: [
-                  'sendOptionForMoreAndCancel',
-                  'assignLocationFromEvent',
-                ],
+                target: 'rooms',
+                actions: 'assignLocationFromEvent',
               },
+              /* basic flow */
+              // {
+              //   target: 'allflats',
+              //   actions: [
+              //     'sendOptionForMoreAndCancel',
+              //     'assignLocationFromEvent',
+              //   ],
+              // },
             ],
             NO_FLATS: {
-              // target: 'default',
-              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
               target: 'default',
+              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
             },
             INVALID: {
               target: 'default',
@@ -91,14 +93,12 @@ export const machineFactory = (config: MachineConfig) => {
           entry: 'sendSelectNoOfRoomsMsg',
           on: {
             ON_MESSAGE: {
-              // target: 'budget',
-              target: 'default',
-              // actions: 'assignNoOfRoomsFromEvent',
+              target: 'budget',
+              actions: 'assignNoOfRoomsFromEvent',
             },
             INVALID: {
-              // target: 'rooms',
-              // actions: 'sendInvalidRoomMsg',
-              target: 'default',
+              target: 'rooms',
+              actions: 'sendInvalidRoomMsg',
             },
           },
         },
@@ -106,19 +106,16 @@ export const machineFactory = (config: MachineConfig) => {
           entry: 'sendSelectBudgetMsg',
           on: {
             SEND_FLAT_DETAILS: {
-              // target: 'allflats',
-              // actions: ['sendOptionForMoreAndCancel', 'assignBudgetFromEvent'],
-              target: 'default',
+              target: 'allflats',
+              actions: ['sendOptionForMoreAndCancel', 'assignBudgetFromEvent'],
             },
             NO_FLATS: {
-              // target: 'default',
-              // actions: ['sendNoFlatDetails', 'assignDefaultValue'],
               target: 'default',
+              actions: ['sendNoFlatDetails', 'assignDefaultValue'],
             },
             INVALID: {
-              // target: 'budget',
-              // actions: 'sendInvalidBudgetMsg',
-              target: 'default',
+              target: 'budget',
+              actions: 'sendInvalidBudgetMsg',
             },
           },
         },

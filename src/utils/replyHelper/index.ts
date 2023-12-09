@@ -46,7 +46,7 @@ export const replyToUser = async (messageObj: any) => {
       state: {
         state: newState ?? '',
         lastSeenAt: dateObj.getTime(),
-        totalAttempts: 1,
+        totalAttempts: 0,
         getContactAttempts: 0,
       },
       createdAt: dateObj.getTime(),
@@ -70,7 +70,7 @@ export const replyToUser = async (messageObj: any) => {
     if (newStateObj.value === 'allflats' && message.toLowerCase() === 'more')
       payload.totalAttempts++;
 
-    if (newStateObj.value === 'allflats' && oldStateObj.value === 'default')
+    if (newStateObj.value === 'allflats' && oldStateObj.value === 'budget')
       payload.totalAttempts++;
 
     await saveUserState(phonenumber, payload);
