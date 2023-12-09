@@ -109,9 +109,9 @@ export const handleMessage = async (
     //   });
     // }
   } else if (state === State.rooms) {
-    message.replace('BHK', '');
     if (message) {
-      const rooms = Number(message);
+      const rooms = Number(message.replace('BHK', ''));
+      console.log(rooms);
       if (message === 'any') {
         await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: '' });
       } else if (message === '1RK') {
