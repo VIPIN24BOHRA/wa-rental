@@ -12,6 +12,7 @@ export default function Users() {
   const [allUsers, setAllUsers] = useState<any>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentUsers, setCurrentUsers] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [key, setKey] = useState('');
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function Users() {
           getContactAttempts: x.state.getContactAttempts,
           detailsAttempts: x.state.totalAttempts,
           createdAt: x.createdAt,
+          subscribed: x.subscribed,
         }));
         setAllUsers(users);
         const totalPage = [];
@@ -80,6 +82,23 @@ export default function Users() {
     setCurrentUsers(allUsers.slice((currentPage - 1) * 10, currentPage * 10));
   };
 
+  const handleSeachNumber = () => {
+    const filteredUsers = allUsers.filter(
+      (u: any) => u.phoneNumber === phoneNumber
+    );
+
+    if (filteredUsers.length) {
+      const newUsers = allUsers.filter(
+        (u: any) => u.phoneNumber !== phoneNumber
+      );
+
+      newUsers.unshift(filteredUsers[0]);
+      setAllUsers([...newUsers]);
+      setCurrentPage(1);
+      setCurrentUsers(newUsers.slice(0, 10));
+    }
+  };
+
   return (
     <div className="flex h-screen w-full flex-col items-center">
       <nav className="flex w-full items-center border-b-[1px] px-8 py-4">
@@ -101,10 +120,29 @@ export default function Users() {
           Save Key
         </button>
       </nav>
+      <div className="flex h-[60px] w-full items-center px-6">
+        <input
+          value={phoneNumber}
+          onChange={(e) => {
+            setPhoneNumber(e.target.value);
+          }}
+          type="text"
+          placeholder="Search by phone number"
+          className="w-[300px] rounded-lg border-[1px] border-[#000] py-1 pl-4 font-semibold outline-none placeholder:text-[#bbb]"
+        />
 
-      <div className="relative mt-8 w-[90%] overflow-x-auto shadow-md sm:rounded-lg">
+        <button
+          className="ml-2 rounded-lg bg-[#000] px-4 py-1 text-sm text-white"
+          onClick={handleSeachNumber}
+          style={{ opacity: phoneNumber.match(/^[9][1]\d{10}$/gm) ? 1 : 0.3 }}
+          disabled={!phoneNumber.match(/^[9][1]\d{10}$/gm)}
+        >
+          Search
+        </button>
+      </div>
+      <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-          <thead className="bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="sticky top-0 bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 contact Number
@@ -133,6 +171,9 @@ export default function Users() {
               <th scope="col" className="px-6 py-3">
                 Contact Attempts
               </th>
+              <th scope="col" className="px-6 py-3">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -140,27 +181,43 @@ export default function Users() {
               <tr
                 key={u.phoneNumber}
                 className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
+                style={
+                  u.phoneNumber === phoneNumber
+                    ? { backgroundColor: '#ddd' }
+                    : {}
+                }
               >
                 <th
                   scope="row"
-                  className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
+                  className="whitespace-nowrap px-6 py-3 font-medium text-gray-900 dark:text-white"
                 >
                   {u.phoneNumber}
                 </th>
-                <td className="px-6 py-4">
+                <td className="px-6 py-3">
                   {`${new Date(u.lastSeenAt)
                     .toDateString()
                     .slice(3)} , ${new Date(
                     u.lastSeenAt
                   ).toLocaleTimeString()}`}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-3">
                   {`${new Date(u.createdAt)
                     .toDateString()
                     .slice(3)} , ${new Date(u.createdAt).toLocaleTimeString()}`}
                 </td>
-                <td className="px-6 py-4">{u.detailsAttempts}</td>
-                <td className="px-6 py-4">{u.getContactAttempts}</td>
+                <td className="px-6 py-3">{u.detailsAttempts}</td>
+                <td className="px-6 py-3">{u.getContactAttempts}</td>
+                <td className="px-6 py-2">
+                  {u.subscribed ? (
+                    <button className="w-[100px] rounded-lg bg-[#ff0000] px-4 py-1 text-white">
+                      Remove
+                    </button>
+                  ) : (
+                    <button className="w-[100px] rounded-lg bg-[#03c04a] px-4 py-1 text-white">
+                      Subscribe
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
