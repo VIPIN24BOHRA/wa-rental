@@ -175,7 +175,7 @@ export default function Users() {
       </div>
       <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
-          <thead className="sticky top-0 bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="sticky top-0 z-10 bg-gray-50 text-sm uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
                 contact Number
@@ -246,7 +246,7 @@ export default function Users() {
                       onClick={() => {
                         handleSubscribe(u.phoneNumber, false);
                       }}
-                      className="w-[100px] rounded-lg bg-[#ff0000] px-4 py-1 text-white opacity-80 shadow-md hover:opacity-100"
+                      className=" w-[100px] rounded-lg bg-[#ff0000] px-4 py-1 text-white opacity-80 shadow-md hover:opacity-100"
                     >
                       {actionLoaderFor === u.phoneNumber ? (
                         <svg
@@ -316,10 +316,10 @@ export default function Users() {
               {allUsers.length}
             </span>
           </span>
-          <ul className="inline-flex h-8 -space-x-px rounded-lg text-sm rtl:space-x-reverse">
+          <ul className="inline-flex h-8 -space-x-px rounded-lg text-xs font-semibold rtl:space-x-reverse">
             <li
               onClick={handlePrevPage}
-              className="ms-0 rounded-s-lg flex h-8 cursor-pointer items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="ms-0 rounded-s-lg flex h-8 cursor-pointer items-center justify-center border border-gray-300 bg-white px-2 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Previous
             </li>
@@ -327,7 +327,7 @@ export default function Users() {
               <li
                 key={x}
                 style={currentPage === x ? { backgroundColor: '#aaa' } : {}}
-                className="rounded-e-lg flex h-8 cursor-pointer items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className="rounded-e-lg flex h-8 cursor-pointer items-center justify-center border border-gray-300 bg-white px-2 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 onClick={() => {
                   handleChangePage(x);
                 }}
