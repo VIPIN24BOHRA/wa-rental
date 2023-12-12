@@ -93,3 +93,24 @@ export const saveUserState = async (phoneNumber: string, state: UserState) => {
     console.log('error while getUserDetails', err);
   }
 };
+
+export const setUserSubscribed = async (
+  phoneNumber: string,
+  subscribe: boolean
+) => {
+  const db = admin.database();
+  const ref = db.ref(sanitizePath(`/app/user/${phoneNumber}`));
+  try {
+    const snap = await ref.once('value');
+    if (snap.exists()) {
+      const userDetails: UserDetails = snap.val();
+      await ref.set(removeNullKeys({ ...userDetails, subscribed: subscribe }));
+      console.log('successfully saved user details ', phoneNumber);
+      return { ...userDetails, subscribed: subscribe };
+    }
+    console.log('user not exists');
+  } catch (err) {
+    console.log('error while getUserDetails', err);
+  }
+  return {} as UserDetails;
+};
