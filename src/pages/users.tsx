@@ -189,7 +189,13 @@ export default function Users() {
               >
                 last Seen
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th
+                scope="col"
+                className="cursor-pointer px-6 py-3"
+                onClick={() => {
+                  handleSortPage('createdAt');
+                }}
+              >
                 Created At
               </th>
               <th
@@ -201,7 +207,13 @@ export default function Users() {
               >
                 Details Attempts
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th
+                scope="col"
+                className="cursor-pointer px-6 py-3"
+                onClick={() => {
+                  handleSortPage('getContactAttempts');
+                }}
+              >
                 Contact Attempts
               </th>
               <th scope="col" className="px-6 py-3">
