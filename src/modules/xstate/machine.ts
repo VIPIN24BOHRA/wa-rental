@@ -26,8 +26,11 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'default',
               actions: 'assignDefaultValue',
             },
+            ON_LOCATION: {
+              target: 'rooms',
+              actions: 'assignLocationFromEvent',
+            },
             /* basic flow */
-
             // SEND_FLAT_DETAILS: {
             //   target: 'allflats',
             //   actions: [
@@ -36,7 +39,6 @@ export const machineFactory = (config: MachineConfig) => {
             //   ],
             // },
             // NO_FLATS: {
-            //   // target: 'default',
             //   actions: ['sendNoFlatDetails', 'assignDefaultValue'],
             //   target: 'default',
             // },

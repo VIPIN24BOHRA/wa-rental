@@ -43,7 +43,11 @@ export const handleMessage = async (
   const state = interpreter.state.value;
   if (state === State.idle) {
     if (userMetaData.state) await interpreter.send({ type: 'ON_MESSAGE' });
-    else await interpreter.send({ type: 'ON_BOARDING' });
+    else {
+      const geoDetails = await getLatLongFromAddress(message);
+      if (!geoDetails) await interpreter.send({ type: 'ON_MESSAGE' });
+      else await interpreter.send({ type: 'ON_LOCATION', ...geoDetails });
+    }
 
     /* basic flow */
     // else {
