@@ -167,7 +167,7 @@ export const handleMessage = async (
       if (
         !userMetaData.subscribed &&
         userMetaData.getContactAttempts &&
-        userMetaData.getContactAttempts >= 5
+        userMetaData.getContactAttempts >= 3
       ) {
         await interpreter.send({ type: 'THRESHOLD_REACHED' });
         return;
