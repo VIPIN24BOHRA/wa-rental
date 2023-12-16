@@ -4,8 +4,10 @@ import axios from 'axios';
 import process from 'process';
 
 export const getLatLongFromAddress = async (address: string) => {
-  if (!address.toLocaleLowerCase().includes('sector'))
-    address = `Sector${address}`;
+  address = address.toLocaleLowerCase().replaceAll('sector', '');
+  address = address.toLocaleLowerCase().replaceAll('sec', '');
+  // if (!address.toLocaleLowerCase().includes('sector'))
+  address = `Sector${address}`;
 
   if (!address.includes('Gurugram')) address += ', Gurugram';
   if (!address.includes('India')) address += ', India';
