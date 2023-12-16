@@ -257,7 +257,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     },
     sendThresholdReachedMsg: async () => {
       const message =
-        '⚠️ Oops!\n\nAapne 5 owners ke mobile number le liye hai. Isse adhik numbers lene ke liye aapko premium service leni hogi\n\nAdhik jaankaari ke liye 9354219098 pe sampark karein.';
+        '⚠️ Oops!\n\nAapne 3 owners ke mobile number le liye hai. Isse adhik numbers lene ke liye aapko premium service leni hogi\n\nAdhik jaankaari ke liye 9354219098 pe sampark karein.';
       await sendTextMessage(
         config.whatsappInstance,
         message,
