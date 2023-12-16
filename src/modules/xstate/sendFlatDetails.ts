@@ -25,11 +25,9 @@ export const sendFlatDetails = async (
     const flatdetails = flats[i];
     const message = `*Rooms* - ${flatdetails.tagLine} \n*Rent* - ${
       flatdetails.price
-    }\n*Address* - ${flatdetails.address}\n*Floor* - ${
-      flatdetails.floorNo
-    }\n*For* - ${flatdetails.for}\n*Avalilable from* -  ${new Date(
-      flatdetails.availableFrom
-    )
+    }\n*Floor* - ${flatdetails.floorNo}\n*For* - ${
+      flatdetails.for
+    }\n*Avalilable from* -  ${new Date(flatdetails.availableFrom)
       .toDateString()
       .slice(3)}\n*Property Code* - ${flatdetails.propertyCode}`;
     const payload: CreateMessagePayload = {
