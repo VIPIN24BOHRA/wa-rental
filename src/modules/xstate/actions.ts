@@ -33,7 +33,7 @@ export const actionsFactory = (config: MachineConfig): any => {
     assignLocationFromEvent: assign({
       longitude: (_, event: any) => event.longitude,
       latitude: (_, event: any) => event.latitude,
-      location: (_, event: any) => event.message,
+      location: (_, event: any) => event.location,
       /* basic flow */
       // videoLinkMap: (_, event: any) => event.videoLinkMap,
       // currentPage: (_, event: any) => event.currentPage,
