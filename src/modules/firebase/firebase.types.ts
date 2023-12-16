@@ -25,5 +25,6 @@ export interface UserSearchedFilters {
   lng: any;
   location: string;
   rooms: string;
-  createdAt: string;
+  createdAt: number;
+  phoneNumber: string;
 }

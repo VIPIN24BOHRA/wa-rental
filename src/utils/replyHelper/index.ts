@@ -1,9 +1,11 @@
 /* eslint-disable no-plusplus */
 import {
   getUserDetails,
+  saveUserSearchedDetails,
   saveUserState,
   setUserDetails,
 } from '@/modules/firebase/database';
+import type { UserSearchedFilters } from '@/modules/firebase/firebase.types';
 import { whatsappStateTransition } from '@/modules/xstate';
 import type { UserMetaData } from '@/modules/xstate/machine.types';
 
@@ -74,5 +76,23 @@ export const replyToUser = async (messageObj: any) => {
       payload.totalAttempts++;
 
     await saveUserState(phonenumber, payload);
+
+    if (newStateObj.value === 'budget' && oldStateObj.value === 'rooms') {
+      if (newStateObj?.context) {
+        const searchedFilter: UserSearchedFilters = {
+          lat: newStateObj?.context?.latitude ?? 0,
+          lng: newStateObj?.context?.longitude ?? 0,
+          location: newStateObj?.context?.location ?? '',
+          rooms:
+            newStateObj?.context?.noOfRooms === '1RK'
+              ? '1RK'
+              : `${newStateObj?.context?.noOfRooms}BHK`,
+          phoneNumber: phonenumber,
+          createdAt: Date.now(),
+        };
+        // console.log(searchedFilter)
+        await saveUserSearchedDetails(searchedFilter);
+      }
+    }
   }
 };

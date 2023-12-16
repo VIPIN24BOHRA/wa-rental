@@ -1,7 +1,12 @@
 import * as admin from 'firebase-admin';
 
 import { removeNullKeys, sanitizePath } from './firebase';
-import type { LocationDetails, UserDetails, UserState } from './firebase.types';
+import type {
+  LocationDetails,
+  UserDetails,
+  UserSearchedFilters,
+  UserState,
+} from './firebase.types';
 
 export const getUserDetails = async (phoneNumber: string) => {
   const db = admin.database();
@@ -113,4 +118,18 @@ export const setUserSubscribed = async (
     console.log('error while getUserDetails', err);
   }
   return {} as UserDetails;
+};
+
+export const saveUserSearchedDetails = async (
+  searchedDetails: UserSearchedFilters
+) => {
+  const db = admin.database();
+  const ref = db.ref(sanitizePath(`/app/searchedDetails/`));
+  try {
+    const newPostRef = ref.push();
+    await newPostRef.set(removeNullKeys(searchedDetails));
+    console.log('successfully saved user searched details ', searchedDetails);
+  } catch (err) {
+    console.log('error while setLocationDetails', err);
+  }
 };

@@ -17,7 +17,7 @@ describe('ReplyHelper tests', () => {
         payload: {
           title: 'any',
           id: '',
-          text: 'Sector 20',
+          text: '1BHK',
           reply: 'any 1',
           postbackText: '',
           description: 'any price',
