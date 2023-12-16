@@ -24,7 +24,7 @@ export interface UserSearchedFilters {
   lat: any;
   lng: any;
   location: string;
-  rooms: string;
+  room: string;
   createdAt: number;
   phoneNumber: string;
 }

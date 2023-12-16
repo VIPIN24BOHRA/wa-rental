@@ -83,7 +83,7 @@ export const replyToUser = async (messageObj: any) => {
           lat: newStateObj?.context?.latitude ?? 0,
           lng: newStateObj?.context?.longitude ?? 0,
           location: newStateObj?.context?.location ?? '',
-          rooms:
+          room:
             newStateObj?.context?.noOfRooms === '1RK'
               ? '1RK'
               : `${newStateObj?.context?.noOfRooms}BHK`,
