@@ -19,3 +19,11 @@ export interface LocationDetails {
   lng: any;
   name?: string;
 }
+
+export interface UserSearchedFilters {
+  lat: any;
+  lng: any;
+  location: string;
+  rooms: string;
+  createdAt: string;
+}

@@ -28,10 +28,12 @@ export const actionsFactory = (config: MachineConfig): any => {
       noOfRooms: () => 0,
       currentPage: () => 1,
       videoLinkMap: () => ({}),
+      location: () => '',
     }),
     assignLocationFromEvent: assign({
       longitude: (_, event: any) => event.longitude,
       latitude: (_, event: any) => event.latitude,
+      location: (_, event: any) => event.message,
       /* basic flow */
       // videoLinkMap: (_, event: any) => event.videoLinkMap,
       // currentPage: (_, event: any) => event.currentPage,

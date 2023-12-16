@@ -17,6 +17,7 @@ export const machineFactory = (config: MachineConfig) => {
         noOfRooms: 0,
         currentPage: 1,
         videoLinkMap: {},
+        location: '',
       } as MachineContext,
       predictableActionArguments: true,
       states: {

@@ -19,7 +19,9 @@ describe('Whatsapp Tests', () => {
         currentPage: 1,
         latitude: 28.4669058,
         videoLinkMap: {},
+        location: '',
       };
+
       const details = await getFlatDetails(userState);
       console.log(details);
       expect(details).not.toEqual(null);

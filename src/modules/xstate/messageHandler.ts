@@ -46,7 +46,12 @@ export const handleMessage = async (
     else {
       const geoDetails = await getLatLongFromAddress(message);
       if (!geoDetails) await interpreter.send({ type: 'ON_MESSAGE' });
-      else await interpreter.send({ type: 'ON_LOCATION', ...geoDetails });
+      else
+        await interpreter.send({
+          type: 'ON_LOCATION',
+          ...geoDetails,
+          location: message,
+        });
     }
 
     /* basic flow */
@@ -85,7 +90,12 @@ export const handleMessage = async (
   } else if (state === State.default) {
     const geoDetails = await getLatLongFromAddress(message);
     if (!geoDetails) await interpreter.send({ type: 'INVALID' });
-    else await interpreter.send({ type: 'ON_MESSAGE', ...geoDetails });
+    else
+      await interpreter.send({
+        type: 'ON_MESSAGE',
+        ...geoDetails,
+        location: message,
+      });
 
     /* basic flow */
 
@@ -119,9 +129,15 @@ export const handleMessage = async (
       if (message === 'any') {
         await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: '' });
       } else if (message === '1RK') {
-        await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: '1RK' });
+        await interpreter.send({
+          type: 'ON_MESSAGE',
+          noOfRooms: '1RK',
+        });
       } else if (!Number.isNaN(rooms) && rooms > 0 && rooms <= 4)
-        await interpreter.send({ type: 'ON_MESSAGE', noOfRooms: rooms });
+        await interpreter.send({
+          type: 'ON_MESSAGE',
+          noOfRooms: rooms,
+        });
       else await interpreter.send({ type: 'INVALID' });
     }
   } else if (state === State.budget) {

@@ -5,6 +5,7 @@ export interface MachineContext {
   longitude: number;
   latitude: number;
   videoLinkMap: VideoLinkMap;
+  location: string;
 }
 
 export interface VideoLinkMap {
