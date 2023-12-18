@@ -25,7 +25,7 @@ export const getFlatDetails = async (userState: MachineContext) => {
     minPrice: Number(minPrice),
     search: '',
     propertyType: [],
-    listing: [],
+    listing: ['Rent'], // only listing type rent .
     forType: [],
   };
   // console.log(payload);
