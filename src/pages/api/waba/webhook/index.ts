@@ -12,8 +12,7 @@ async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
       `this is phone number ${
         process.env.PHONE_ID
       } this is app name ${process.env.APP_NAME?.slice(
-        0,
-        3
+        -4
       )} this is database url ${
         process.env.FIREBASE_DATABASE_URL
       }, these are account basic details`
