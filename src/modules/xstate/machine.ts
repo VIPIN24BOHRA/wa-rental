@@ -120,6 +120,10 @@ export const machineFactory = (config: MachineConfig) => {
               target: 'budget',
               actions: 'sendInvalidBudgetMsg',
             },
+            API_NOT_WORKING: {
+              target: 'default',
+              actions: ['sendApiNotWorking', 'assignDefaultValue'],
+            },
           },
         },
         allflats: {

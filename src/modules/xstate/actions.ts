@@ -241,6 +241,15 @@ export const actionsFactory = (config: MachineConfig): any => {
         await config.whatsappInstance.send(payload);
       }
     },
+
+    sendApiNotWorking: async () => {
+      const message = `Oops, Technical issue 🚫\n\n*_Please thodi der baad kosis kre, technical issue sahi ki ja rhi h._* 🔄`;
+      await sendTextMessage(
+        config.whatsappInstance,
+        message,
+        config.userMetaData.phonenumber
+      );
+    },
     sendNoFlatDetails: async () => {
       const message = `Apologies, but we cannot find the flats. 🚫\n\n*_Terminating, you can start from the beginning._* 🔄`;
       await sendTextMessage(

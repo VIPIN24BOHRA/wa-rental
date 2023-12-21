@@ -143,29 +143,31 @@ export const handleMessage = async (
   } else if (state === State.budget) {
     // check here if the budget is ok or not;
 
-    if (message !== 'any' && message.split('-').length < 2) {
-      await interpreter.send({ type: 'INVALID' });
-      return;
-    }
+    interpreter.send({ type: 'API_NOT_WORKING' });
 
-    const faltDetails = await getFlatDetails({
-      ...interpreter.state.context,
-      budget: message,
-    });
-    if (!faltDetails.length) await interpreter.send({ type: 'NO_FLATS' });
-    const videoLinkMap: any = {};
-    faltDetails.forEach((f: any) => {
-      videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
-    });
+    // if (message !== 'any' && message.split('-').length < 2) {
+    //   await interpreter.send({ type: 'INVALID' });
+    //   return;
+    // }
 
-    await sendFlatDetails(faltDetails, userMetaData);
-    await interpreter.send({
-      type: 'SEND_FLAT_DETAILS',
-      budget: message,
-      currentPage: interpreter.state.context.currentPage + 1,
-      flatList: faltDetails,
-      videoLinkMap,
-    });
+    // const faltDetails = await getFlatDetails({
+    //   ...interpreter.state.context,
+    //   budget: message,
+    // });
+    // if (!faltDetails.length) await interpreter.send({ type: 'NO_FLATS' });
+    // const videoLinkMap: any = {};
+    // faltDetails.forEach((f: any) => {
+    //   videoLinkMap[f.videoAssetId] = f.originalDownlaodUrl;
+    // });
+
+    // await sendFlatDetails(faltDetails, userMetaData);
+    // await interpreter.send({
+    //   type: 'SEND_FLAT_DETAILS',
+    //   budget: message,
+    //   currentPage: interpreter.state.context.currentPage + 1,
+    //   flatList: faltDetails,
+    //   videoLinkMap,
+    // });
   } else if (state === State.allflats) {
     let event = STATE_ACTION_EVENT_MAP[state][userActionId] || 'INVALID';
 
