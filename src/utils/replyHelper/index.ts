@@ -9,6 +9,8 @@ import type { UserSearchedFilters } from '@/modules/firebase/firebase.types';
 import { whatsappStateTransition } from '@/modules/xstate';
 import type { UserMetaData } from '@/modules/xstate/machine.types';
 
+import { setStopNotification } from '../flatDetailsHelper';
+import { isStopMessage } from '../helper';
 import { parseMessage } from './messageParser';
 
 export const replyToUser = async (messageObj: any) => {
@@ -20,6 +22,11 @@ export const replyToUser = async (messageObj: any) => {
   )
     return;
   const { phonenumber, message, name } = parseMessage(messageObj);
+
+  if (isStopMessage(message)) {
+    await setStopNotification(phonenumber);
+    return;
+  }
 
   // get the user details from db from here.
 

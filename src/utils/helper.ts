@@ -14,3 +14,10 @@ export function hash(obj: any) {
   }
   return Math.abs(hashed);
 }
+
+export const isStopMessage = (message: any) => {
+  if (message.trim().toLowerCase() === 'stop') {
+    return true;
+  }
+  return false;
+};

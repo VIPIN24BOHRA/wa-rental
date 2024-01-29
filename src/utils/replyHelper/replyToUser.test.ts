@@ -15,12 +15,9 @@ describe('ReplyHelper tests', () => {
         source: '916396623229',
         type: 'text',
         payload: {
-          title: 'any',
+          title: '',
           id: '',
-          text: '1BHK',
-          reply: 'any 1',
-          postbackText: '',
-          description: 'any price',
+          text: 'Stop ',
         },
         sender: {
           phone: '916396623229',

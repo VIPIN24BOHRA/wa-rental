@@ -36,3 +36,21 @@ export const getFlatDetails = async (userState: MachineContext) => {
   if (res.data && res.data?.videoDetails?.length) return res.data?.videoDetails;
   return [];
 };
+
+export const setStopNotification = async (phoneNumber: string) => {
+  try {
+    const res = await axios.post(
+      'https://flat-dekho-web-server.vercel.app/api/updateNotificationFlag',
+      {
+        apiKey: process.env.WEB_API_KEY,
+        phoneNumber,
+        doNotSendNotification: true,
+      }
+    );
+    console.log('updateNotificationFlag api status', res?.status);
+    return {};
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
