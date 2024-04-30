@@ -20,10 +20,11 @@ export const authenticateUser = async (messageObj: any) => {
   if (message === 'Hi Please log me in to flatdekho') {
     console.log('Message is matching');
     const userDetails = {
-      phonenumber,
+      phoneNumber: phonenumber,
       name,
       expireAt: Date.now() + 5 * 60 * 1000,
     };
+    console.log('this is user data', userDetails);
     const keyObj = await createWaNewLoginObj(userDetails);
     if (keyObj) {
       const encryptKey = encryptData({ ...userDetails, key: keyObj.key });
