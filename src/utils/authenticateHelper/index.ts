@@ -35,7 +35,7 @@ export const authenticateUser = async (messageObj: any) => {
     await sendMessageToWhatsapp({
       phoneNumber: '916396623229',
       type: 'text',
-      text: `https://flatdekho.co.in/auth/login/${encryptKey}`,
+      text: `https://flatdekho.co.in/waLogin/${encryptKey}`,
     });
   }
 };
