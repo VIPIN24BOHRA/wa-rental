@@ -2,6 +2,7 @@
 // import '@/modules/firebase/firebase';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import NextCors from 'nextjs-cors';
 
 import { decryptData } from '@/utils/authenticateHelper/helper';
 
@@ -47,6 +48,27 @@ async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const origin = req.headers.origin ?? '';
+  let allowedOrigin = '';
+
+  if (!origin) {
+    allowedOrigin = 'http://localhost:4200';
+  } else if (
+    origin === 'http://localhost:4200' ||
+    origin === 'https://flatdekho.co.in' ||
+    origin === 'https://dev.flatdekho.co.in' ||
+    origin === 'https://flatdekho.app' ||
+    origin === 'https://dev.flatdekho.app'
+  ) {
+    allowedOrigin = origin;
+  }
+
+  await NextCors(req, res, {
+    // Options
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    origin: allowedOrigin,
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
   if (req.method === 'POST') await handlePostRequest(req, res);
   else if (req.method === 'GET') await handleGetRequest(req, res);
   else res.status(400).send('Invalid request method');
