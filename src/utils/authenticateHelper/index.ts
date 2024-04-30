@@ -1,6 +1,5 @@
 /* eslint-disable  simple-import-sort/imports */
 import { sendMessageToWhatsapp } from '@/modules/whatsapp/whatsapp';
-import { createWaNewLoginObj } from '@/modules/firebase/userDB';
 import { parseMessage } from '../replyHelper/messageParser';
 import { encryptData } from './helper';
 
@@ -25,20 +24,18 @@ export const authenticateUser = async (messageObj: any) => {
       expireAt: Date.now() + 5 * 60 * 1000,
     };
     console.log('this is user data', userDetails);
-    const keyObj = await createWaNewLoginObj(userDetails);
-    if (keyObj) {
-      const encryptKey = encryptData({ ...userDetails, key: keyObj.key });
-      console.log('this is encrypted key', encryptKey);
-      await sendMessageToWhatsapp({
-        phoneNumber: '916396623229',
-        type: 'text',
-        text: 'Hi there! 👋 Your flat dekho adventure awaits! Click on the link below for seamless login',
-      });
-      await sendMessageToWhatsapp({
-        phoneNumber: '916396623229',
-        type: 'text',
-        text: `https://flatdekho.co.in/waLogin/${encryptKey}`,
-      });
-    }
+
+    const encryptKey = encryptData(userDetails);
+    console.log('this is encrypted key', encryptKey);
+    await sendMessageToWhatsapp({
+      phoneNumber: '916396623229',
+      type: 'text',
+      text: 'Hi there! 👋 Your flat dekho adventure awaits! Click on the link below for seamless login',
+    });
+    await sendMessageToWhatsapp({
+      phoneNumber: '916396623229',
+      type: 'text',
+      text: `https://flatdekho.co.in/waLogin/${encryptKey}`,
+    });
   }
 };

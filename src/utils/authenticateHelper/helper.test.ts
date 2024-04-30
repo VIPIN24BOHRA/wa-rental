@@ -24,7 +24,7 @@ describe('crypto test', () => {
 
   it('should decrypt the data', async () => {
     const decryptedData = decryptData(
-      'NmQ5NGNkYTYwNjg0OTc0YTIxN2U1ZjcyYTg2ZTI3OTNhYjViMmQ2ZWI4ODEwMjJjOWFjM2FlMzMwZTdkMDgyODJmODQ1ZTVlMDFjZDQ1MmU1YzViMDhiODdiMmUyNDU0NDkzYTQ3ZmFhZDU0ZTY3MDEyODZkZjRhNjdlNThhODMwY2JjNWEzOTdiZjc5ODQ0ZGI2OTY4NDEwNzg2MmIxYw=='
+      'NmQ5NGNkYTYwNjg0OTc0YTIxN2U1ZjcyYTg2ZTI3OTNhYjViMmQ2ZWI4ODEwMjJjOWFjM2FlMzMwZTdkMDgyODcyNzZiOTc4YWYwMWI4MDQzYzZlMGY5MmIzYWVhNmIzNTUxMTQwMmYwYTk0MDc2MDJlYjQ0Y2IxOTBiYmQ0MjM4OTBmZDAzMmY1YzE5M2FhYmViYTgyZjlmNzc5NzlhODg1MDQ4NjVlNDI1MjdhNGIxMGU5MzlkZWUxMWNjOWRlN2FmNWZkYTU0ZTNkN2Y1ODAwNjdiMjc0YzdhZmY0ZjQ='
     );
     console.log(decryptedData, JSON.parse(decryptedData));
     expect(decryptedData).not.toEqual(null);
