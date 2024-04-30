@@ -6,17 +6,17 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { authenticateUser } from '@/utils/authenticateHelper';
 
 async function handleGetRequest(_req: NextApiRequest, res: NextApiResponse) {
-  res
-    .status(200)
-    .send(
-      `this is authenticate user this is phone number ${
-        process.env.PHONE_ID
-      } this is app name ${process.env.APP_NAME?.slice(
-        -5
-      )} this is database url ${
-        process.env.FIREBASE_DATABASE_URL
-      }, these are account basic details`
-    );
+  res.status(200).send(
+    `this is authenticate user this is phone number ${
+      process.env.PHONE_ID
+    } this is app name ${process.env.APP_NAME?.slice(
+      -5
+    )} this is database url ${
+      process.env.FIREBASE_DATABASE_URL
+    }, these are account basic details
+      
+      this is encryption method ${process.env.ECNRYPTION_METHOD}`
+  );
 }
 
 async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
