@@ -25,8 +25,9 @@ export function encryptData(data: any) {
     key,
     encryptionIV
   );
+
   return Buffer.from(
-    cipher.update(data, 'utf8', 'hex') + cipher.final('hex')
+    cipher.update(JSON.stringify(data), 'utf8', 'hex') + cipher.final('hex')
   ).toString('base64'); // Encrypts data and converts to hex and base64
 }
 
