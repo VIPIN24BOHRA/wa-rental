@@ -18,7 +18,7 @@ export const getWaUserDetails = async (phoneNumber: string) => {
   return {} as UserDetails;
 };
 
-export const setWaUserDetails = async (userDetails: UserDetails) => {
+export const setWaUserDetails = async (userDetails: any) => {
   if (!userDetails || !userDetails.phoneNumber) return;
   const db = admin.database();
   const ref = db.ref(sanitizePath(`/app/user/${userDetails.phoneNumber}`));

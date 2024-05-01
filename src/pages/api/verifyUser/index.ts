@@ -4,6 +4,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
+import { setWaUserDetails } from '@/modules/firebase/userDB';
 import { decryptData } from '@/utils/authenticateHelper/helper';
 
 async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
@@ -22,6 +23,7 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
     const userData = JSON.parse(decryptData(token) ?? '');
 
     if (userData && userData?.expireAt < Date.now()) {
+      await setWaUserDetails({ ...userData, lastLoginAt: Date.now() });
       res.status(400).send({ msg: 'expired token', success: false });
 
       return;
