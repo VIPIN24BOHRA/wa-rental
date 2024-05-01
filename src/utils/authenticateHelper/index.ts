@@ -28,12 +28,12 @@ export const authenticateUser = async (messageObj: any) => {
     const encryptKey = encryptData(userDetails);
     console.log('this is encrypted key', encryptKey);
     await sendMessageToWhatsapp({
-      phoneNumber: '916396623229',
+      phoneNumber: phonenumber,
       type: 'text',
       text: 'Hi there! 👋 Your flat dekho adventure awaits! Click on the link below for seamless login',
     });
     await sendMessageToWhatsapp({
-      phoneNumber: '916396623229',
+      phoneNumber: phonenumber,
       type: 'text',
       text: `https://dev.flatdekho.co.in/waLogin/${encryptKey}`,
     });
