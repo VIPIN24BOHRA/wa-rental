@@ -29,10 +29,10 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).send({ success: true, user: userData });
     return;
-  } catch (e) {
+  } catch (e: any) {
     // eslint-disable-next-line no-console
     console.error(e);
-    res.status(200).send('unable to save response');
+    res.status(400).send({ success: false, error: e.message });
   }
 }
 
