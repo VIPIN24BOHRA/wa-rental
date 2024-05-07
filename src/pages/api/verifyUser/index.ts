@@ -23,12 +23,11 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
     const userData = JSON.parse(decryptData(token) ?? '');
 
     if (userData && userData?.expireAt < Date.now()) {
-      await setWaUserDetails({ ...userData, lastLoginAt: Date.now() });
       res.status(400).send({ msg: 'expired token', success: false });
 
       return;
     }
-
+    await setWaUserDetails({ ...userData, lastLoginAt: Date.now() });
     res.status(200).send({ success: true, user: userData });
     return;
   } catch (e: any) {
