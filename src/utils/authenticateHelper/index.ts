@@ -17,11 +17,12 @@ export const authenticateUser = async (messageObj: any) => {
   console.log(phonenumber, message, name);
   const msg = `${message}`;
   if (msg.includes('Hi Please log me in to flatdekho')) {
-    const filterData = msg.split('--')[1];
+    let filterData = msg.split('--')[1];
+
     console.log('this is filterData', filterData);
     if (filterData) {
-      const filters = atob(filterData);
-      console.log('this is filters', filters);
+      filterData = atob(filterData);
+      console.log('this is filters', filterData);
     }
 
     const userDetails = {
@@ -33,6 +34,11 @@ export const authenticateUser = async (messageObj: any) => {
 
     const encryptKey = encryptData(userDetails);
     console.log('this is encrypted key', encryptKey);
+
+    const urlData = { filters: filterData ?? '', token: encryptKey };
+
+    console.log('this is encrypted data', atob(JSON.stringify(urlData)));
+
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
