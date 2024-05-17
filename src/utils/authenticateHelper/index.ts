@@ -37,7 +37,7 @@ export const authenticateUser = async (messageObj: any) => {
 
     const urlData = { filters: filterData ?? '', token: encryptKey };
 
-    console.log('this is encrypted data', atob(JSON.stringify(urlData)));
+    console.log('this is encrypted data', urlData);
 
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
