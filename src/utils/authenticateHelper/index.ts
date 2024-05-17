@@ -21,7 +21,7 @@ export const authenticateUser = async (messageObj: any) => {
 
     console.log('this is filterData', filterData);
     if (filterData) {
-      filterData = atob(filterData);
+      filterData = JSON.parse(atob(filterData));
       console.log('this is filters', filterData);
     }
 
