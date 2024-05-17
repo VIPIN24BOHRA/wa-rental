@@ -15,9 +15,15 @@ export const authenticateUser = async (messageObj: any) => {
   const { phonenumber, message, name } = parseMessage(messageObj);
 
   console.log(phonenumber, message, name);
+  const msg = `${message}`;
+  if (msg.includes('Hi Please log me in to flatdekho')) {
+    const filterData = msg.split('--')[1];
+    console.log('this is filterData', filterData);
+    if (filterData) {
+      const filters = atob(filterData);
+      console.log('this is filters', filters);
+    }
 
-  if (message === 'Hi Please log me in to flatdekho') {
-    console.log('Message is matching');
     const userDetails = {
       phoneNumber: phonenumber,
       name,
