@@ -52,7 +52,7 @@ export const authenticateUser = async (messageObj: any) => {
       phoneNumber: phonenumber,
       type: 'text',
       text: `https://flatdekho.co.in/waLogin/1?filtersData=${encodeURIComponent(
-        encryptKey
+        btoa(JSON.stringify(urlData))
       )}?utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
   }
