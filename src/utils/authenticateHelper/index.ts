@@ -53,7 +53,7 @@ export const authenticateUser = async (messageObj: any) => {
       type: 'text',
       text: `https://flatdekho.co.in/waLogin/1?filtersData=${encodeURIComponent(
         btoa(JSON.stringify(urlData))
-      )}?utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
+      )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
   }
 };
