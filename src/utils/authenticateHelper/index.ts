@@ -51,7 +51,7 @@ export const authenticateUser = async (messageObj: any) => {
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
-      text: `https://flatdekho.co.in/waLogin/1?filtesData=${encodeURIComponent(
+      text: `https://flatdekho.co.in/waLogin/1?filtersData=${encodeURIComponent(
         encryptKey
       )}?utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
