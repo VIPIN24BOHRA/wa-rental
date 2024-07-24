@@ -100,9 +100,7 @@ export const authenticateUser = async (messageObj: any) => {
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
-      text: `${url}&filtersData=${encodeURIComponent(
-        btoa(JSON.stringify(urlData))
-      )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
+      text: url,
     });
   }
 };
