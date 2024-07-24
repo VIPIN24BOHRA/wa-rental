@@ -90,7 +90,7 @@ export const authenticateUser = async (messageObj: any) => {
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
-      text: `https://clipskart/waLogin/1?filtersData=${encodeURIComponent(
+      text: `https://clipskart.in/waLogin/1?filtersData=${encodeURIComponent(
         btoa(JSON.stringify(urlData))
       )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
