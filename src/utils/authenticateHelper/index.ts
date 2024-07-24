@@ -55,5 +55,44 @@ export const authenticateUser = async (messageObj: any) => {
         btoa(JSON.stringify(urlData))
       )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
+  } else if (msg.includes('Hi Please log me in to Clipskart')) {
+    let filterData = msg.split('--')[1];
+
+    console.log('this is filterData', filterData);
+    if (filterData) {
+      filterData = JSON.parse(atob(filterData));
+      console.log('this is filters', filterData);
+    }
+
+    const userDetails = {
+      phoneNumber: phonenumber,
+      name,
+      expireAt: Date.now() + 5 * 60 * 1000,
+    };
+    console.log('this is user data', userDetails);
+
+    const encryptKey = encryptData(userDetails);
+    console.log('this is encrypted key', encryptKey);
+
+    const urlData = { filters: filterData ?? '', token: encryptKey };
+
+    console.log(
+      'this is encrypted data',
+      urlData,
+      btoa(JSON.stringify(urlData))
+    );
+
+    await sendMessageToWhatsapp({
+      phoneNumber: phonenumber,
+      type: 'text',
+      text: 'Hi there! 👋 Your Clipskart adventure awaits! Click on the link below for seamless login',
+    });
+    await sendMessageToWhatsapp({
+      phoneNumber: phonenumber,
+      type: 'text',
+      text: `https://clipskart/waLogin/1?filtersData=${encodeURIComponent(
+        btoa(JSON.stringify(urlData))
+      )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
+    });
   }
 };
