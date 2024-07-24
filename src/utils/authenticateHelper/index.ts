@@ -56,7 +56,7 @@ export const authenticateUser = async (messageObj: any) => {
       )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
   } else if (msg.includes('Hi Please log me in to Clipskart')) {
-    let filterData = msg.split('--')[1];
+    let filterData: any = msg.split('--')[1];
 
     console.log('this is filterData', filterData);
     if (filterData) {
@@ -82,6 +82,16 @@ export const authenticateUser = async (messageObj: any) => {
       btoa(JSON.stringify(urlData))
     );
 
+    let url = `https://clipskart.in/waLogin/1?filtersData=${encodeURIComponent(
+      btoa(JSON.stringify(urlData))
+    )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
+
+    if (filterData?.productUrl) {
+      url = `${filterData?.productUrl}&filtersData=${encodeURIComponent(
+        btoa(JSON.stringify(urlData))
+      )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
+    }
+
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
@@ -90,7 +100,7 @@ export const authenticateUser = async (messageObj: any) => {
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
-      text: `https://clipskart.in/waLogin/1?filtersData=${encodeURIComponent(
+      text: `${url}&filtersData=${encodeURIComponent(
         btoa(JSON.stringify(urlData))
       )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`,
     });
