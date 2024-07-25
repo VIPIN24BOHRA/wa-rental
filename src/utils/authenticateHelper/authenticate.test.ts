@@ -15,9 +15,9 @@ describe('crypto test', () => {
     type: 'text',
     payload: {
       text:
-        'Hi Please log me in to flatdekho\n' +
+        'Hi Please log me in to Clipskart\n' +
         '\n' +
-        '--eyJtaW5QcmljZSI6MCwibWF4UHJpY2UiOjAsImxhdGl0dWRlIjoiIiwibG9uZ2l0dWRlIjoiIiwiaXNNZWFsUmVxdWlyZWQiOmZhbHNlLCJzaGFyaW5nVHlwZXMiOltdLCJhdmFpbGFibGVGb3IiOiIiLCJsYXN0UHJvcGVydHlDb2RlIjoiMzIiLCJjdXJyZW50UGFnZSI6MX0=--',
+        '--eyJjdXJyZW50S2V5IjoiMTkiLCJjdXJyZW50UmF0aW8iOiIwIiwibmV4dEtleSI6IjEiLCJuZXh0UmF0aW8iOiIwMDAwMF8xIiwicHJvZHVjdFVybCI6Imh0dHBzOi8vY2xpcHNrYXJ0LmluL3Byb2R1Y3QvdGFsa2luZy1mbGFzaC1jYXJkcz90eXBlPXRveXMiLCJuZXh0VmlkZW9VcmwiOiJodHRwczovL3ZpZGVvLmd1bWxldC5pby82NjM4NjZiNDQ1ZGNiNGM2YWE4NTI3NWEvNjY4NjM1Zjc3MGExNmVlNGViMjI3Y2I0L21haW4ubTN1OCJ9--',
     },
     sender: {
       phone: '916396623229',

@@ -82,18 +82,34 @@ export const authenticateUser = async (messageObj: any) => {
       btoa(JSON.stringify(urlData))
     );
 
-    let url = `${
-      filterData?.redirectUrl ?? 'https://clipskart.in/'
-    }?filtersData=${encodeURIComponent(
-      btoa(JSON.stringify(urlData))
-    )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
+    let url;
 
-    if (filterData?.productUrl) {
-      url = `${filterData?.productUrl}&filtersData=${encodeURIComponent(
-        btoa(JSON.stringify(urlData))
-      )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
+    if (filterData?.redirectUrl) {
+      url = new URL(filterData?.redirectUrl);
+      url.search = '';
+      url.hash = '';
+      url.searchParams.set('token', encryptKey);
+      url.searchParams.set('utm_source', 'whatsapp_login');
+      url.searchParams.set('utm_medium', 'inbox');
+      url.searchParams.set('mobileId', phonenumber);
+      url = url.toString();
+    } else if (filterData?.productUrl) {
+      url = new URL(filterData?.productUrl);
+
+      url.searchParams.set('currentKey', filterData?.currentKey ?? '');
+      url.searchParams.set('currentRatio', filterData?.currentRatio ?? '');
+      url.searchParams.set('nextKey', filterData?.nextKey ?? '');
+      url.searchParams.set('nextRatio', filterData?.nextRatio ?? '');
+      url.searchParams.set('nextVideoUrl', filterData?.nextVideoUrl ?? '');
+      url.searchParams.set('token', encryptKey);
+      url.searchParams.set('utm_source', 'whatsapp_login');
+      url.searchParams.set('utm_medium', 'inbox');
+      url.searchParams.set('mobileId', phonenumber);
+
+      url = url.toString();
     }
 
+    console.log(url);
     await sendMessageToWhatsapp({
       phoneNumber: phonenumber,
       type: 'text',
