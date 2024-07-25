@@ -83,7 +83,7 @@ export const authenticateUser = async (messageObj: any) => {
     );
 
     let url = `https://clipskart.in/${encodeURIComponent(
-      filterData.collectionType ?? ''
+      filterData?.collectionType ?? ''
     )}?filtersData=${encodeURIComponent(
       btoa(JSON.stringify(urlData))
     )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
