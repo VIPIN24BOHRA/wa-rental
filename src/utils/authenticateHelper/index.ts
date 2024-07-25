@@ -82,7 +82,9 @@ export const authenticateUser = async (messageObj: any) => {
       btoa(JSON.stringify(urlData))
     );
 
-    let url = `https://clipskart.in/waLogin/1?filtersData=${encodeURIComponent(
+    let url = `https://clipskart.in/${encodeURIComponent(
+      filterData.collectionType ?? ''
+    )}?filtersData=${encodeURIComponent(
       btoa(JSON.stringify(urlData))
     )}&utm_source=whatsapp_login&utm_medium=inbox&mobileId=${phonenumber}`;
 
